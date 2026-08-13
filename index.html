@@ -8628,13 +8628,15 @@
     box-shadow:0 8px 24px rgba(22,61,48,.07);
   }
   .masthead .masthead-info-title {
-    margin:0 0 12px;
+    margin:0 0 14px;
+    padding-bottom:11px;
     display:flex;
     align-items:center;
     gap:8px;
     color:#174c3a;
     font-size:14px;
     font-weight:800;
+    border-bottom:1px solid #e3e9e6;
   }
   .masthead .masthead-info-title::before {
     content:"";
@@ -8707,7 +8709,9 @@
     border-bottom:1px solid #e8ecea;
     color:#405a51;
     font-size:13px;
+    transition:background .15s ease;
   }
+  .masthead .masthead-info-panel .meta > span:hover { background:#f7faf8; }
   .masthead .hero.masthead-balanced .masthead-info-panel .meta > span {
     width:auto !important;
     min-width:0 !important;
@@ -8751,6 +8755,31 @@
     text-decoration:none;
   }
   .masthead .masthead-info-panel .release-navigation > a:hover { border-color:#1b8354; background:#eef8f3; }
+  @media(min-width:1250px){
+    .masthead .hero.masthead-balanced .masthead-info-panel .meta {
+      grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    }
+    .masthead .hero.masthead-balanced .masthead-info-panel .meta > span {
+      min-height:58px !important;
+      justify-content:center;
+      text-align:center;
+      border-bottom:0 !important;
+      border-inline-end:1px solid #e8ecea !important;
+    }
+    .masthead .hero.masthead-balanced .masthead-info-panel .meta > span:last-child {
+      grid-column:auto !important;
+      border-inline-end:0 !important;
+    }
+    .masthead .masthead-info-panel .release-navigation {
+      grid-template-columns:minmax(0,1.45fr) minmax(0,.85fr) !important;
+      align-items:stretch;
+    }
+    .masthead .masthead-info-panel .next-release,
+    .masthead .masthead-info-panel .release-navigation > a {
+      min-height:52px;
+      margin:0 !important;
+    }
+  }
   @media(max-width:980px){
     .masthead .hero.masthead-balanced {
       grid-template-columns:1fr !important;
@@ -8775,6 +8804,7 @@
       grid-column:auto !important;
       border-inline-end:0 !important;
     }
+    .masthead .masthead-info-title { margin-bottom:10px; padding-bottom:9px; }
   }
 </style>
 <script id="masthead-balanced-layout-script">
