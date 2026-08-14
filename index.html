@@ -6,6 +6,16 @@
   <title>الشريط الحالي | الرقم القياسي لأسعار العقارات — الربع الثاني 2026</title>
   <style>
     :root{--green:#1b8354;--green-dark:#0f5132;--green-soft:#edf7f2;--ink:#17352b;--muted:#60726b;--line:#d4e4dc;--surface:#fff;--page:#f7faf8;--danger:#b42318}
+    /* Critical link styles: kept in the first stylesheet to prevent the
+       browser's default blue links from appearing during initial paint. */
+    a:where(:link,:visited,:hover,:active){color:var(--green)}
+    .masthead .breadcrumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 9px}
+    .masthead .breadcrumbs a:where(:link,:visited){color:#52605a;text-decoration:none;font-weight:500;border-bottom:1px solid transparent}
+    .masthead .breadcrumbs a:where(:hover,:focus-visible){color:var(--green);border-bottom-color:var(--green)}
+    .masthead .breadcrumbs [aria-current="page"]{color:var(--green);font-weight:700}
+    .masthead .breadcrumbs>span[aria-hidden="true"]{color:#9da4a0}
+    .masthead .release-navigation{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:9px}
+    .masthead .release-navigation a:where(:link,:visited){display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:8px 13px;color:#166a45;background:#fff;border:1px solid #b9c9c1;border-radius:8px;text-decoration:none;font-weight:700}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--page);color:var(--ink);font-family:"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.65}button,input,select{font:inherit}button,a,select{touch-action:manipulation}.container{width:min(1180px,calc(100% - 32px));margin:auto}
     .masthead{background:linear-gradient(135deg,#f1faf6 0%,#fff 68%);border-bottom:1px solid var(--line);padding:28px 0 24px}.breadcrumbs{margin:0 0 14px;color:var(--muted);font-size:14px}.hero-grid{display:grid;grid-template-columns:1fr auto;gap:26px;align-items:end}.hero h1{margin:0;color:#0e4731;font-size:clamp(30px,4vw,52px);line-height:1.25}.hero p{margin:10px 0 0;color:var(--muted);font-size:18px}.meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px;color:#52675f;font-size:14px}.meta span{display:inline-flex;align-items:center;gap:7px}.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:9px 16px;border:1px solid #99c9b2;border-radius:9px;background:#fff;color:#0f6845;text-decoration:none;font-weight:700;cursor:pointer}.btn:hover,.btn:focus-visible{background:var(--green-soft);outline:2px solid transparent}.btn.primary{background:var(--green);color:#fff;border-color:var(--green)}
     main{padding:26px 0 48px}.explorer{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}.explorer-head{padding:20px 22px 16px;border-bottom:1px solid var(--line)}.eyebrow{display:block;color:var(--green);font-weight:800;font-size:14px}.explorer-head h2{margin:3px 0 0;font-size:clamp(23px,3vw,32px)}.dataset-nav{display:flex;gap:8px;overflow-x:auto;padding:14px 22px 0;scrollbar-width:thin}.dataset-tab{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:#2e4940;padding:10px 15px;border-radius:9px;font-weight:700;cursor:pointer;white-space:nowrap}.dataset-tab:hover,.dataset-tab:focus-visible{border-color:#7bbb9e;background:var(--green-soft)}.dataset-tab.active{background:var(--green);border-color:var(--green);color:#fff}
@@ -4668,6 +4678,9 @@
 <!-- FULL-INDEX-DEV-NAV-CSS:END -->
 </head>
 <body>
+<a class="a11y-skip-link" href="#main-content">تجاوز إلى المحتوى الرئيسي</a>
+<div class="download-toast" id="downloadToast" role="status" aria-live="polite" aria-atomic="true" hidden><span class="download-toast-icon" aria-hidden="true">✓</span><span id="downloadToastText"></span></div>
+<script>window.showDownloadToast=(message)=>{const toast=document.getElementById('downloadToast'),text=document.getElementById('downloadToastText');if(!toast||!text)return;clearTimeout(window.__downloadToastTimer);text.textContent=message;toast.hidden=false;requestAnimationFrame(()=>toast.classList.add('is-visible'));window.__downloadToastTimer=setTimeout(()=>{toast.classList.remove('is-visible');setTimeout(()=>toast.hidden=true,180)},2800)};document.addEventListener('click',event=>{const target=event.target.closest('#exportBtn,#jsonExportBtn,#apiExportBtn,#sdmxExportBtn,.toolbar-btn-excel,#comparisonExcel,#comparisonPng,#comparisonSvg,.repi-chart-action[data-action="png"],.repi-chart-action[data-action="svg"]');if(!target)return;const action=target.dataset.action,id=target.id,mapped={exportBtn:'CSV',jsonExportBtn:'JSON',apiExportBtn:'API JSON',sdmxExportBtn:'SDMX-CSV',comparisonExcel:'Excel',comparisonPng:'PNG',comparisonSvg:'SVG'}[id],label=action?.toUpperCase()||mapped||(target.classList.contains('toolbar-btn-excel')?'Excel':'الملف');setTimeout(()=>window.showDownloadToast?.(`تم تجهيز ملف ${label} وبدء تنزيله`),action==='png'||id==='comparisonPng'?650:180)},true);</script>
 <!-- FULL-INDEX-DEV-NAV:BEGIN -->
 <header
       class="goh"
@@ -5975,7 +5988,7 @@
         </nav>
         <h1>الرقم القياسي لأسعار العقارات</h1>
         <p>الربع الثاني 2026</p>
-        <div class="meta"><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v5l3 2"/></svg>تاريخ النشر: 20 يوليو 2026</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg>سنة الأساس: 2023 = 100</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 6M20 5v6h-6"/></svg>تحديث ربع سنوي</span></div>
+        <div class="meta" aria-label="بيانات النشرة"><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v5l3 2"/></svg>تاريخ النشر: <time datetime="2026-07-20">20 يوليو 2026</time></span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg>سنة الأساس: 2023 = 100</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 6M20 5v6h-6"/></svg>تحديث ربع سنوي</span></div>
         <div class="release-navigation" aria-label="معلومات الإصدار والتنقل">
           <span class="next-release"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14v14H5zM8 3v6M16 3v6M5 10h14"/></svg>النشرة القادمة: 20 أكتوبر 2026 — الربع الثالث 2026</span>
           <a href="https://azghamdi.github.io/releases-archive/">الرجوع للنشرات السابقة <span aria-hidden="true">←</span></a>
@@ -5985,12 +5998,13 @@
     </div>
   </header>
 
-  <main class="container">
+  <main class="container" id="main-content" tabindex="-1">
     <section class="explorer" aria-label="بيانات النشرة">
       <div class="explorer-head"><span class="eyebrow">بيانات النشرة</span></div>
       <div class="view-tabs" role="tablist" aria-label="طريقة عرض البيانات">
         <button class="view-tab active" id="dataTableTab" type="button" role="tab" aria-selected="true" aria-controls="dataTablePanel">جدول البيانات</button>
         <button class="view-tab" id="chartsTab" type="button" role="tab" aria-selected="false" aria-controls="chartsPanel">الرسومات البيانية</button>
+        <button class="view-tab" id="compareTab" type="button" role="tab" aria-selected="false" aria-controls="comparePanel">مقارنة البيانات</button>
       </div>
       <div class="view-panel" id="dataTablePanel" role="tabpanel" aria-labelledby="dataTableTab">
       <style id="dataset-tabs-distinction">
@@ -6025,24 +6039,25 @@
           <a class="toolbar-btn toolbar-btn-excel" href="https://www.stats.gov.sa/documents/20117/2435267/REPI_Q2_2026_AR_EN+%281%29.xlsx/9c426236-4dd2-6882-0075-147b8ac9d283?t=1784443512008" title="تنزيل ملف Excel الرسمي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM15 3v5h5M9 12l5 6m0-6-5 6"/></svg><span>تنزيل Excel</span></a>
         </div>
       </div>
-      <div class="table-heading"><div><h3 id="tableTitle"></h3><p id="tableDescription"></p></div><div class="results" id="resultsCount" aria-live="polite"></div></div>
-      <div class="table-wrap" tabindex="0" role="region" aria-label="جدول بيانات الرقم القياسي لأسعار العقارات — يمكن التمرير أفقيًا"><table class="data-table"><thead id="tableHead"></thead><tbody id="tableBody"></tbody></table></div>
+      <div class="table-heading"><div><h3 id="tableTitle"></h3><p id="tableDescription"></p></div><div class="results" id="resultsCount" role="status" aria-live="polite" aria-atomic="true"></div></div>
+      <details class="table-definitions" id="tableDefinitions"><summary>تعريفات المؤشرات والوحدات</summary><div class="table-definitions-content" id="tableDefinitionsContent"></div></details>
+      <p class="sr-only" id="tableKeyboardHelp">يمكن التنقل داخل الجدول باستخدام قارئ الشاشة. استخدم مفتاح الجدولة للوصول إلى أزرار ترتيب الأعمدة، ويمكن تمرير منطقة الجدول أفقيًا عند صغر الشاشة.</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="tableTitle" aria-describedby="tableDescription tableKeyboardHelp"><table class="data-table"><caption class="sr-only" id="tableCaption">بيانات الرقم القياسي لأسعار العقارات</caption><thead id="tableHead"></thead><tbody id="tableBody"></tbody></table></div>
       <p class="note">يمكن البحث والتصفية والترتيب، ثم تصدير النتائج الحالية فقط إلى ملف CSV.</p>
-      <div class="pagination"><div class="page-size"><label for="pageSize">عدد الصفوف في الصفحة</label><select id="pageSize"><option>10</option><option selected>20</option><option>50</option><option>100</option></select></div><div class="pager" id="pager"></div></div>
-      <section class="data-provenance" aria-label="مصدر البيانات وخيارات المطورين">
-        <div class="provenance-main">
-          <span class="provenance-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6l8-3 8 3-8 3zM4 6v12l8 3 8-3V6M12 9v12"/></svg></span>
-          <div><span class="provenance-label">المصدر والجهة المنتجة</span><strong>الهيئة العامة للإحصاء — المملكة العربية السعودية</strong><p>الرقم القياسي لأسعار العقارات، الربع الثاني 2026. المصدر الإداري: بيانات الصفقات العقارية.</p></div>
-          <a href="https://www.stats.gov.sa/ar/statistics" target="_blank" rel="noopener">زيارة المصدر الرسمي <span aria-hidden="true">↗</span></a>
-        </div>
+      <div class="pagination"><div class="page-size"><label for="pageSize">عدد الصفوف في الصفحة</label><select id="pageSize"><option selected>10</option><option>20</option><option>50</option><option>100</option></select></div><div class="pager" id="pager"></div></div>
+      <section class="data-provenance" aria-label="خيارات الوصول المتخصص">
         <div class="developer-access">
-          <div class="developer-heading"><span class="provenance-label">الوصول المتخصص</span><strong>تنزيل البيانات المفلترة بصيغ قابلة للمعالجة</strong></div>
-          <div class="developer-actions">
-            <button class="developer-btn" id="jsonExportBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H5v16h3M16 4h3v16h-3M10 9l4 3-4 3"/></svg><span>JSON</span></button>
-            <button class="developer-btn" id="apiExportBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 4l-4 16"/></svg><span>API JSON</span></button>
-            <button class="developer-btn" id="sdmxExportBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM4 10h16M10 5v14"/></svg><span>SDMX-CSV</span></button>
+          <div class="developer-heading">
+            <span class="developer-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 4H5v16h3M16 4h3v16h-3M10 9l4 3-4 3"/></svg></span>
+            <div><span class="provenance-label">الوصول المتخصص</span><h3>بيانات جاهزة للاستخدام البرمجي</h3><p>نزّل نتائج الجدول الحالية بصيغ منظمة تناسب التحليل والتكامل مع الأنظمة.</p></div>
+            <span class="developer-filter-badge"><i aria-hidden="true"></i>حسب الفلاتر الحالية</span>
           </div>
-          <p class="developer-note">تُنشأ الملفات مباشرة من اختيارك الحالي دون إرسال البيانات إلى خدمة خارجية.</p>
+          <div class="developer-actions">
+            <button class="developer-btn" id="jsonExportBtn" type="button"><span class="developer-btn-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H5v16h3M16 4h3v16h-3M10 9l4 3-4 3"/></svg></span><span class="developer-btn-copy"><strong>JSON</strong><small>سجلات منظمة للتحليل والتطوير</small></span><span class="developer-format" aria-hidden="true">.json</span></button>
+            <button class="developer-btn" id="apiExportBtn" type="button"><span class="developer-btn-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 4l-4 16"/></svg></span><span class="developer-btn-copy"><strong>API JSON</strong><small>استجابة جاهزة لمحاكاة التكامل</small></span><span class="developer-format" aria-hidden="true">API</span></button>
+            <button class="developer-btn" id="sdmxExportBtn" type="button"><span class="developer-btn-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM4 10h16M10 5v14"/></svg></span><span class="developer-btn-copy"><strong>SDMX-CSV</strong><small>صيغة تبادل للبيانات الإحصائية</small></span><span class="developer-format" aria-hidden="true">.csv</span></button>
+          </div>
+          <p class="developer-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.6-2.8 8-7 10-4.2-2-7-5.4-7-10V6zM9 12l2 2 4-4"/></svg><span>تُنشأ الملفات داخل المتصفح من اختيارك الحالي، دون إرسال البيانات إلى خدمة خارجية.</span></p>
         </div>
       </section>
       </div>
@@ -6052,6 +6067,34 @@
         </style>
         <div class="repi-charts-intro"><div><h3>مؤشر أسعار العقارات في رسوم</h3><p>عرض بصري تفاعلي مبني على بيانات الجداول نفسها — الربع الثاني 2026</p></div></div>
         <div class="repi-chart-grid" id="repiChartGrid"></div>
+      </div>
+      <div class="view-panel comparison-panel" id="comparePanel" role="tabpanel" aria-labelledby="compareTab" hidden>
+        <div class="comparison-intro">
+          <div><span class="comparison-kicker">أداة تحليل تفاعلية</span><h3>مقارنة بيانات أسعار العقارات</h3><p>قارن القطاعات أو أنواع العقارات أو المناطق بين فترتين، واعرض الفروق مباشرة.</p></div>
+          <span class="comparison-limit">يمكن اختيار 4 عناصر كحد أقصى</span>
+        </div>
+        <div class="comparison-controls" aria-label="خيارات المقارنة">
+          <div class="comparison-field"><label for="comparisonScope">نطاق المقارنة</label><select id="comparisonScope"><option value="sector">القطاعات وأنواع العقارات</option><option value="region">المناطق الإدارية</option></select></div>
+          <div class="comparison-field"><label for="comparisonCurrent">الفترة الحالية</label><select id="comparisonCurrent"></select></div>
+          <button class="comparison-swap" id="comparisonSwap" type="button" title="تبديل الفترتين" aria-label="تبديل الفترة الحالية وفترة المقارنة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3M18 7l-3 3M6 17l3-3"/></svg></button>
+          <div class="comparison-field"><label for="comparisonBase">فترة المقارنة</label><select id="comparisonBase"></select></div>
+        </div>
+        <fieldset class="comparison-items"><legend>عناصر المقارنة</legend><div class="comparison-checks" id="comparisonChecks"></div></fieldset>
+        <div class="comparison-actions">
+          <button type="button" id="comparisonReset">إعادة ضبط</button>
+          <button type="button" id="comparisonShare">نسخ رابط المقارنة</button>
+          <button type="button" id="comparisonExcel">تنزيل Excel</button>
+          <button type="button" id="comparisonPdf" aria-describedby="comparisonPdfHint">PDF / طباعة</button>
+          <button type="button" id="comparisonPng">PNG</button>
+          <button type="button" id="comparisonSvg">SVG</button>
+        </div><p class="comparison-pdf-hint" id="comparisonPdfHint">يفتح معاينة الطباعة؛ اختر «حفظ كملف PDF» لتنزيل التقرير.</p>
+        <div class="comparison-summary" id="comparisonSummary" aria-live="polite"></div>
+        <div class="comparison-visual">
+          <div class="comparison-visual-head"><div><h4 id="comparisonChartTitle">مقارنة مباشرة بين الفترتين</h4><p id="comparisonChartSubtitle"></p></div><div class="comparison-chart-toolbar"><div class="comparison-legend"><span><i class="current"></i>الفترة الحالية</span><span><i class="base"></i>فترة المقارنة</span></div><label for="comparisonSort">ترتيب النتائج</label><select id="comparisonSort"><option value="default">الترتيب الأصلي</option><option value="increase">الأعلى ارتفاعًا</option><option value="decrease">الأعلى انخفاضًا</option><option value="current">أعلى قيمة حاليًا</option></select><button id="comparisonClearFocus" type="button" hidden>إظهار الكل</button></div></div>
+          <div class="comparison-chart-wrap"><svg id="comparisonChart" viewBox="0 0 900 420" role="img" aria-label="رسم مقارنة بيانات أسعار العقارات"></svg><div class="comparison-chart-tooltip" id="comparisonChartTooltip" hidden></div></div>
+        </div>
+        <div class="comparison-table-head"><div><h4>جدول نتائج المقارنة</h4><p>القيم والفروق محسوبة مباشرةً من الفترتين المختارتين.</p></div><span id="comparisonResultCount"></span></div>
+        <div class="comparison-table-wrap" tabindex="0" role="region" aria-label="جدول نتائج المقارنة — يمكن التمرير أفقيًا"><table><colgroup><col class="comparison-col-name"><col class="comparison-col-value"><col class="comparison-col-value"><col class="comparison-col-change"><col class="comparison-col-change"></colgroup><thead><tr><th>العنصر</th><th id="comparisonCurrentHead">الفترة الحالية</th><th id="comparisonBaseHead">فترة المقارنة</th><th>الفرق</th><th>نسبة التغير</th></tr></thead><tbody id="comparisonTableBody"></tbody></table></div>
       </div>
     </section>
 
@@ -6227,18 +6270,31 @@
     (()=>{
       const data=window.NEWSLETTER_DATA;
 
-      const viewTabs={table:document.querySelector('#dataTableTab'),charts:document.querySelector('#chartsTab'),tablePanel:document.querySelector('#dataTablePanel'),chartsPanel:document.querySelector('#chartsPanel')};
-      function switchView(view){const showTable=view==='table';viewTabs.table.classList.toggle('active',showTable);viewTabs.charts.classList.toggle('active',!showTable);viewTabs.table.setAttribute('aria-selected',String(showTable));viewTabs.charts.setAttribute('aria-selected',String(!showTable));viewTabs.tablePanel.hidden=!showTable;viewTabs.chartsPanel.hidden=showTable;}
-      viewTabs.table.addEventListener('click',()=>switchView('table'));viewTabs.charts.addEventListener('click',()=>switchView('charts'));
+      const viewTabs={table:document.querySelector('#dataTableTab'),charts:document.querySelector('#chartsTab'),compare:document.querySelector('#compareTab'),tablePanel:document.querySelector('#dataTablePanel'),chartsPanel:document.querySelector('#chartsPanel'),comparePanel:document.querySelector('#comparePanel')};
+      function switchView(view){['table','charts','compare'].forEach(name=>{const active=view===name;viewTabs[name].classList.toggle('active',active);viewTabs[name].setAttribute('aria-selected',String(active));viewTabs[name].tabIndex=active?0:-1;viewTabs[name+'Panel'].hidden=!active});}
+      viewTabs.table.addEventListener('click',()=>switchView('table'));viewTabs.charts.addEventListener('click',()=>switchView('charts'));viewTabs.compare.addEventListener('click',()=>switchView('compare'));switchView('table');
       const els={nav:document.querySelector('#datasetNav'),search:document.querySelector('#searchInput'),filters:[document.querySelector('#filter1'),document.querySelector('#filter2'),document.querySelector('#filter3')],filterWraps:[document.querySelector('#filter1Wrap'),document.querySelector('#filter2Wrap'),document.querySelector('#filter3Wrap')],filterLabels:[document.querySelector('#filter1Label'),document.querySelector('#filter2Label'),document.querySelector('#filter3Label')],title:document.querySelector('#tableTitle'),desc:document.querySelector('#tableDescription'),head:document.querySelector('#tableHead'),body:document.querySelector('#tableBody'),count:document.querySelector('#resultsCount'),pager:document.querySelector('#pager'),pageSize:document.querySelector('#pageSize')};
-      let state={dataset:0,search:'',filters:{},sort:{column:null,direction:1},page:1,pageSize:20};
+      let state={dataset:0,search:'',filters:{},sort:{column:null,direction:1},page:1,pageSize:10};
       const normalize=v=>String(v??'').trim().toLocaleLowerCase('ar');
       const format=v=>typeof v==='number'?new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(v):v;
+      const definitionText={
+        'العام':'السنة الميلادية التي تنتمي إليها فترة الرصد.',
+        'الربع':'الفترة الربعية للرصد أو المتوسط السنوي المحسوب من أرباع السنة.',
+        'القطاع ونوع العقار':'التصنيف الاقتصادي للعقار ضمن القطاع السكني أو التجاري أو الزراعي وتفريعاته.',
+        'المنطقة الإدارية':'المنطقة الإدارية التي نُسبت إليها الصفقات العقارية المستخدمة في احتساب المؤشر.',
+        'الأوزان (%)':'الأهمية النسبية للتصنيف في تركيب الرقم القياسي، ويبلغ مجموع الأوزان 100%.',
+        'المؤشر':'مقياس نسبي لتطور أسعار العقارات مقارنة بسنة الأساس 2023 التي تساوي 100.',
+        'التغير الربعي (%)':'نسبة تغير قيمة المؤشر مقارنة بالربع السابق مباشرة.',
+        'التغير السنوي (%)':'نسبة تغير قيمة المؤشر مقارنة بالربع المناظر من العام السابق.'
+      };
+      const columnDefinition=column=>definitionText[column]||(/^الربع/.test(column)?'قيمة الرقم القياسي خلال الفترة المحددة، محسوبة على أساس 2023 = 100.':'قيمة إحصائية منشورة ضمن بيانات النشرة الرسمية.');
+      const columnUnit=column=>column==='العام'?'سنة ميلادية':column==='الربع'?'فترة زمنية':column.includes('(%)')||column.includes('التغير')||column.includes('الأوزان')?'نسبة مئوية (%)':column==='المؤشر'||/^الربع/.test(column)?'نقطة مؤشر (2023 = 100)':'تصنيف نصي';
+      function renderDefinitions(){const d=data.datasets[state.dataset],content=document.getElementById('tableDefinitionsContent'),caption=document.getElementById('tableCaption');if(caption)caption.textContent=`${d.title}. ${d.description}`;if(content)content.innerHTML=`<dl>${d.columns.map((column,i)=>`<dt id="column-definition-${i}">${column}</dt><dd>${columnDefinition(column)}</dd><dd class="definition-unit"><span class="sr-only">الوحدة: </span>${columnUnit(column)}</dd>`).join('')}</dl>`}
       function renderNav(){els.nav.innerHTML='';data.datasets.forEach((d,i)=>{const b=document.createElement('button');b.type='button';b.className='dataset-tab'+(i===state.dataset?' active':'');b.textContent=d.shortTitle;b.setAttribute('aria-current',i===state.dataset?'true':'false');b.onclick=()=>{state={dataset:i,search:'',filters:{},sort:{column:null,direction:1},page:1,pageSize:state.pageSize};els.search.value='';renderAll()};els.nav.appendChild(b)})}
       function renderFilters(){const d=data.datasets[state.dataset];els.filters.forEach((select,i)=>{const colName=d.filters[i];const wrap=els.filterWraps[i];if(!colName){wrap.classList.add('hidden');return}wrap.classList.remove('hidden');const col=d.columns.indexOf(colName);els.filterLabels[i].textContent=colName;select.innerHTML='<option value="">الكل</option>';[...new Set(d.rows.map(r=>r[col]).filter(v=>v!==''&&v!=null))].sort((a,b)=>String(a).localeCompare(String(b),'ar',{numeric:true})).forEach(v=>{const o=document.createElement('option');o.value=String(v);o.textContent=String(v);select.appendChild(o)});select.value=state.filters[colName]||'';select.onchange=()=>{state.filters[colName]=select.value;state.page=1;renderTable()}})}
       function rowForDisplay(row){return row}
-      function filteredRows(){const d=data.datasets[state.dataset];let rows=d.rows.map(rowForDisplay).filter(r=>{if(state.search&&!r.some(v=>normalize(v).includes(state.search)))return false;return Object.entries(state.filters).every(([name,val])=>!val||String(r[d.columns.indexOf(name)])===val)});if(state.sort.column!==null){const c=state.sort.column,dir=state.sort.direction;rows=rows.slice().sort((a,b)=>{const av=a[c],bv=b[c],an=Number(av),bn=Number(bv);if(av!==''&&bv!==''&&!Number.isNaN(an)&&!Number.isNaN(bn))return(an-bn)*dir;return String(av).localeCompare(String(bv),'ar',{numeric:true})*dir})}return rows}
-      function renderTable(){const d=data.datasets[state.dataset];els.title.textContent=d.title;els.desc.textContent=d.description;els.head.innerHTML='<tr>'+d.columns.map((c,i)=>`<th scope="col" aria-sort="${state.sort.column===i?(state.sort.direction===1?'ascending':'descending'):'none'}"><button type="button" data-sort="${i}" aria-label="ترتيب حسب ${c}"><span>${c}</span><span aria-hidden="true">${state.sort.column===i?(state.sort.direction===1?'↑':'↓'):'↕'}</span></button></th>`).join('')+'</tr>';els.head.querySelectorAll('button').forEach(b=>b.onclick=()=>{const c=Number(b.dataset.sort);state.sort=state.sort.column===c?{column:c,direction:-state.sort.direction}:{column:c,direction:1};renderTable()});const rows=filteredRows();const pages=Math.max(1,Math.ceil(rows.length/state.pageSize));if(state.page>pages)state.page=pages;const start=(state.page-1)*state.pageSize;const visible=rows.slice(start,start+state.pageSize);els.count.textContent=rows.length?`عرض ${start+1}–${Math.min(start+state.pageSize,rows.length)} من ${rows.length} صفًا`:'لا توجد نتائج';const dlCount=document.querySelector('#filteredDownloadCount');if(dlCount)dlCount.textContent=`(${rows.length})`;els.body.innerHTML=visible.length?visible.map(r=>'<tr>'+r.map((v,i)=>{const num=Number(v),classes=[];if(v!==''&&!Number.isNaN(num))classes.push('numeric');if(!Number.isNaN(num)&&/التغي/.test(d.columns[i]))classes.push(num<0?'negative':num>0?'positive':'');return `<td class="${classes.join(' ')}">${format(v)}</td>`}).join('')+'</tr>').join(''):'<tr><td class="empty" colspan="'+d.columns.length+'">لم يتم العثور على بيانات مطابقة.</td></tr>';renderPager(pages)}
+      function filteredRows(){const d=data.datasets[state.dataset];let rows=d.rows.map(rowForDisplay).filter(r=>{if(state.search&&!r.some(v=>normalize(v).includes(state.search)))return false;return Object.entries(state.filters).every(([name,val])=>!val||String(r[d.columns.indexOf(name)])===val)});if(state.sort.column!==null){const c=state.sort.column,dir=state.sort.direction;rows=rows.slice().sort((a,b)=>{const av=a[c],bv=b[c],an=Number(av),bn=Number(bv);if(av!==''&&bv!==''&&!Number.isNaN(an)&&!Number.isNaN(bn))return(an-bn)*dir;return String(av).localeCompare(String(bv),'ar',{numeric:true})*dir})}else{const yearCol=d.columns.indexOf('العام'),quarterCol=d.columns.indexOf('الربع');if(yearCol!==-1&&quarterCol!==-1){const quarterRank={'الربع الرابع':4,'الربع الثالث':3,'الربع الثاني':2,'الربع الأول':1,'المتوسط السنوي':0};rows=rows.map((row,index)=>({row,index})).sort((a,b)=>(Number(b.row[yearCol])-Number(a.row[yearCol]))||(quarterRank[b.row[quarterCol]]||0)-(quarterRank[a.row[quarterCol]]||0)||a.index-b.index).map(item=>item.row)}}return rows}
+      function renderTable(){const d=data.datasets[state.dataset];els.title.textContent=d.title;els.desc.textContent=d.description;renderDefinitions();els.head.innerHTML='<tr>'+d.columns.map((c,i)=>`<th scope="col" aria-sort="${state.sort.column===i?(state.sort.direction===1?'ascending':'descending'):'none'}" aria-describedby="column-definition-${i}"><button type="button" data-sort="${i}" aria-label="ترتيب حسب ${c}"><span>${c}</span><span aria-hidden="true">${state.sort.column===i?(state.sort.direction===1?'↑':'↓'):'↕'}</span></button></th>`).join('')+'</tr>';els.head.querySelectorAll('button').forEach(b=>b.onclick=()=>{const c=Number(b.dataset.sort);state.sort=state.sort.column===c?{column:c,direction:-state.sort.direction}:{column:c,direction:1};renderTable()});const rows=filteredRows();const pages=Math.max(1,Math.ceil(rows.length/state.pageSize));if(state.page>pages)state.page=pages;const start=(state.page-1)*state.pageSize;const visible=rows.slice(start,start+state.pageSize);els.count.textContent=rows.length?`عرض ${start+1}–${Math.min(start+state.pageSize,rows.length)} من ${rows.length} صفًا`:'لا توجد نتائج';const dlCount=document.querySelector('#filteredDownloadCount');if(dlCount)dlCount.textContent=`(${rows.length})`;els.body.innerHTML=visible.length?visible.map(r=>'<tr>'+r.map((v,i)=>{const num=Number(v),classes=[];if(v!==''&&!Number.isNaN(num))classes.push('numeric');if(!Number.isNaN(num)&&/التغي/.test(d.columns[i]))classes.push(num<0?'negative':num>0?'positive':'');return i===0?`<th scope="row" class="${classes.join(' ')}">${format(v)}</th>`:`<td class="${classes.join(' ')}">${format(v)}</td>`}).join('')+'</tr>').join(''):'<tr><td class="empty" colspan="'+d.columns.length+'">لم يتم العثور على بيانات مطابقة.</td></tr>';renderPager(pages)}
       function renderPager(pages){els.pager.innerHTML='';const add=(label,page,disabled=false,active=false)=>{const b=document.createElement('button');b.type='button';b.className='page-btn'+(active?' active':'');b.textContent=label;b.disabled=disabled;b.onclick=()=>{state.page=page;renderTable();document.querySelector('.explorer').scrollIntoView({behavior:'smooth',block:'start'})};els.pager.appendChild(b)};add('‹',Math.max(1,state.page-1),state.page===1);let from=Math.max(1,state.page-2),to=Math.min(pages,from+4);from=Math.max(1,to-4);for(let p=from;p<=to;p++)add(String(p),p,false,p===state.page);add('›',Math.min(pages,state.page+1),state.page===pages)}
       function renderAll(){renderNav();renderFilters();renderTable()}
       els.search.addEventListener('input',()=>{state.search=normalize(els.search.value);state.page=1;renderTable()});els.pageSize.addEventListener('change',()=>{state.pageSize=Number(els.pageSize.value);state.page=1;renderTable()});document.querySelector('#resetBtn').onclick=()=>{state.search='';state.filters={};state.sort={column:null,direction:1};state.page=1;els.search.value='';renderAll()};const saveBlob=(blob,name)=>{const a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};const machinePayload=()=>{const d=data.datasets[state.dataset],rows=filteredRows(),records=rows.map(row=>Object.fromEntries(d.columns.map((column,i)=>[column,row[i]])));return{d,rows,records,payload:{meta:{datasetId:'SA-GASTAT-REPI-Q2-2026-'+(state.dataset+1),title:d.title,description:d.description,producer:'الهيئة العامة للإحصاء — المملكة العربية السعودية',source:data.source,generatedAt:new Date().toISOString(),language:'ar',filters:{search:state.search,...state.filters},rowCount:records.length},data:records}}};document.querySelector('#exportBtn').onclick=()=>{const d=data.datasets[state.dataset],rows=filteredRows(),csv='\ufeff'+[d.columns,...rows].map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(',')).join('\r\n');saveBlob(new Blob([csv],{type:'text/csv;charset=utf-8'}),d.shortTitle+'-filtered.csv')};document.querySelector('#jsonExportBtn').onclick=()=>{const {d,payload}=machinePayload();saveBlob(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'}),d.shortTitle+'-filtered.json')};document.querySelector('#apiExportBtn').onclick=()=>{const {d,payload}=machinePayload(),response={status:200,apiVersion:'1.0',self:location.href.split('#')[0],...payload};saveBlob(new Blob([JSON.stringify(response,null,2)],{type:'application/json;charset=utf-8'}),d.shortTitle+'-api-response.json')};document.querySelector('#sdmxExportBtn').onclick=()=>{const {d,rows}=machinePayload(),header=['STRUCTURE','STRUCTURE_ID','ACTION',...d.columns],body=rows.map(row=>['dataflow','SA-GASTAT:REPI_Q2_2026(1.0)','I',...row]),csv='\ufeff'+[header,...body].map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(',')).join('\r\n');saveBlob(new Blob([csv],{type:'text/csv;charset=utf-8'}),d.shortTitle+'-sdmx.csv')};const shareBtn=document.querySelector('#shareBtn');if(shareBtn)shareBtn.onclick=async()=>{const share={title:document.title,text:'جداول الرقم القياسي لأسعار العقارات — الربع الثاني 2026',url:location.href};if(navigator.share)await navigator.share(share);else{await navigator.clipboard.writeText(location.href);alert('تم نسخ رابط الصفحة')}};document.querySelectorAll('[data-copy-target]').forEach(button=>{button.addEventListener('click',async()=>{const target=document.getElementById(button.dataset.copyTarget);const text=target.innerText.trim();try{await navigator.clipboard.writeText(text)}catch(error){const area=document.createElement('textarea');area.value=text;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();document.execCommand('copy');area.remove()}const original=button.textContent;button.textContent=button.closest('[lang="en"]')?'Copied':'تم النسخ';button.classList.add('copied');setTimeout(()=>{button.textContent=original;button.classList.remove('copied')},1600)})});renderAll();
@@ -6321,17 +6377,18 @@
     const activeDatasetIndex=()=>[...document.querySelectorAll('#datasetNav .dataset-tab')].findIndex(tab=>tab.classList.contains('active'));
     const readState=()=>{
       const params=new URLSearchParams();
-      params.set('view',document.querySelector('#chartsTab')?.classList.contains('active')?'charts':'table');
+      const view=document.querySelector('#compareTab')?.classList.contains('active')?'compare':document.querySelector('#chartsTab')?.classList.contains('active')?'charts':'table';params.set('view',view);
       params.set('dataset',String(Math.max(0,activeDatasetIndex())));
       ids.forEach(id=>{const el=document.getElementById(id);if(el&&el.value)params.set(id,el.value)});
+      if(view==='compare'){const scope=document.getElementById('comparisonScope'),current=document.getElementById('comparisonCurrent'),base=document.getElementById('comparisonBase'),sort=document.getElementById('comparisonSort'),items=[...document.querySelectorAll('#comparisonChecks input:checked')].map(input=>input.value);params.set('compare','1');if(scope?.value)params.set('cmpScope',scope.value);if(current?.value)params.set('cmpCurrent',current.value);if(base?.value)params.set('cmpBase',base.value);if(items.length)params.set('cmpItems',items.join(','));if(sort?.value)params.set('cmpSort',sort.value)}
       return params;
     };
-    const syncUrl=()=>{if(restoring)return;clearTimeout(updateTimer);updateTimer=setTimeout(()=>history.replaceState(null,'',location.pathname+location.search+'#'+readState().toString()),80)};
+    const syncUrl=()=>{if(restoring)return;clearTimeout(updateTimer);updateTimer=setTimeout(()=>{const url=new URL(location.href);url.search='';url.hash=readState().toString();history.replaceState(null,'',url.href)},80)};
     const setControl=(id,value)=>{const el=document.getElementById(id);if(!el||value===null)return;const valid=id.startsWith('filter')?[...el.options].some(o=>o.value===value):true;if(!valid)return;el.value=value;el.dispatchEvent(new Event(id==='searchInput'?'input':'change',{bubbles:true}))};
     const restore=()=>{
       const raw=location.hash.slice(1);if(!raw||!raw.includes('='))return;
       restoring=true;const params=new URLSearchParams(raw),dataset=Math.max(0,Number(params.get('dataset'))||0);
-      (params.get('view')==='charts'?document.querySelector('#chartsTab'):document.querySelector('#dataTableTab'))?.click();
+      (params.get('view')==='compare'?document.querySelector('#compareTab'):params.get('view')==='charts'?document.querySelector('#chartsTab'):document.querySelector('#dataTableTab'))?.click();
       const tabs=[...document.querySelectorAll('#datasetNav .dataset-tab')];tabs[Math.min(dataset,tabs.length-1)]?.click();
       setTimeout(()=>{setControl('searchInput',params.get('searchInput'));setControl('filter1',params.get('filter1'));setControl('filter2',params.get('filter2'));setControl('filter3',params.get('filter3'));setControl('pageSize',params.get('pageSize'));restoring=false;syncUrl()},50);
     };
@@ -6339,8 +6396,8 @@
     document.addEventListener('change',event=>{if(ids.includes(event.target.id))syncUrl()});
     document.addEventListener('click',event=>{if(event.target.closest('.view-tab,.dataset-tab'))syncUrl()});
     document.getElementById('copyViewLinkBtn')?.addEventListener('click',async event=>{
-      const button=event.currentTarget,url=location.href.split('#')[0]+'#'+readState().toString();
-      try{await navigator.clipboard.writeText(url)}catch(error){const area=document.createElement('textarea');area.value=url;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();document.execCommand('copy');area.remove()}
+      const button=event.currentTarget,shareUrl=new URL(location.href);shareUrl.search='';shareUrl.hash=readState().toString();const url=shareUrl.href;
+      try{if(!navigator.clipboard?.writeText)throw new Error('clipboard unavailable');await navigator.clipboard.writeText(url)}catch(error){const area=document.createElement('textarea');area.value=url;area.readOnly=true;area.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;opacity:0';document.body.appendChild(area);area.focus();area.select();area.setSelectionRange(0,area.value.length);const copied=document.execCommand('copy');area.remove();if(!copied)window.prompt('انسخ الرابط التالي:',url)}
       const label=button.querySelector('span'),original=label.textContent;label.textContent='تم نسخ الرابط';button.classList.add('is-copied');setTimeout(()=>{label.textContent=original;button.classList.remove('is-copied')},1800);
     });
     if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(restore,0));else setTimeout(restore,0);
@@ -8389,24 +8446,30 @@
 <style id="data-provenance-access-style">
   #dataTablePanel .toolbar-btn small { font-size: 11px; font-weight: 600; color: #60726b; }
   #dataTablePanel #copyViewLinkBtn.is-copied { color:#fff; background:#1b8354; border-color:#1b8354; }
-  .data-provenance { margin: 4px 24px 24px; display: grid; grid-template-columns: minmax(0,1.35fr) minmax(0,1fr); gap: 12px; }
-  .provenance-main,.developer-access { min-width: 0; padding: 16px; border: 1px solid #d9dfdc; border-radius: 8px; background: #fff; }
-  .provenance-main { display: grid; grid-template-columns: 42px minmax(0,1fr) auto; align-items: center; gap: 13px; }
-  .provenance-icon { width: 42px; height: 42px; display: grid; place-items: center; color: #1b8354; background: #eef8f3; border-radius: 8px; }
-  .provenance-icon svg,.developer-btn svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-  .provenance-label { display: block; margin-bottom: 2px; color: #60726b; font-size: 12px; font-weight: 700; }
-  .provenance-main strong,.developer-access strong { display: block; color: #243a32; font-size: 14px; }
-  .provenance-main p { margin: 3px 0 0; color: #60726b; font-size: 12px; }
-  .provenance-main > a { padding: 7px 10px; color: #166a45; border: 1px solid #b9c9c1; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: 700; white-space: nowrap; }
-  .provenance-main > a:hover { background: #eef8f3; border-color: #1b8354; }
-  .developer-access { display: grid; grid-template-columns:1fr; align-content:center; gap: 10px; }
-  .developer-heading { display:flex; align-items:end; justify-content:space-between; gap:12px; }
-  .developer-actions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
-  .developer-btn { min-height: 40px; padding: 7px 9px; display: inline-flex; align-items: center; justify-content:center; gap: 6px; color: #166a45; background: #fff; border: 1px solid #9fb5aa; border-radius: 6px; font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; transition:background .15s,border-color .15s,transform .15s; }
-  .developer-btn:hover,.developer-btn:focus-visible { background: #eef8f3; border-color: #1b8354; transform:translateY(-1px); }
-  .developer-note { margin:0; color:#60726b; font-size:11px; }
-  @media(max-width:900px){.data-provenance{grid-template-columns:1fr}.provenance-main{grid-template-columns:42px minmax(0,1fr)}.provenance-main>a{grid-column:2}}
-  @media(max-width:600px){.data-provenance{margin-inline:14px}.provenance-main,.developer-access{padding:13px}.provenance-main{grid-template-columns:1fr}.provenance-icon{display:none}.provenance-main>a{grid-column:auto;width:fit-content}.developer-actions{grid-template-columns:1fr}.developer-heading{display:block}}
+  .data-provenance { margin: 8px 24px 26px; }
+  .developer-access { min-width:0; padding:20px; display:grid; gap:16px; overflow:hidden; border:1px solid #cddbd4; border-radius:12px; background:linear-gradient(135deg,#fbfdfc 0%,#f5faf7 100%); box-shadow:0 5px 18px rgba(22,61,48,.05); }
+  .developer-heading { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:13px; }
+  .developer-heading-icon { width:48px; height:48px; display:grid; place-items:center; color:#166a45; background:#e5f4ec; border:1px solid #c5e3d4; border-radius:12px; }
+  .developer-heading-icon svg,.developer-btn svg,.developer-note svg { fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+  .developer-heading-icon svg { width:24px; height:24px; }
+  .provenance-label { display:block; margin-bottom:2px; color:#60726b; font-size:11px; font-weight:700; }
+  .developer-heading h3 { margin:0; color:#163d30; font-size:17px; line-height:1.45; }
+  .developer-heading p { margin:3px 0 0; color:#60726b; font-size:12px; }
+  .developer-filter-badge { display:inline-flex; align-items:center; gap:7px; padding:5px 9px; color:#166a45; background:#fff; border:1px solid #c7ddd2; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
+  .developer-filter-badge i { width:7px; height:7px; border-radius:50%; background:#1b8354; box-shadow:0 0 0 3px #e5f4ec; }
+  .developer-actions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+  .developer-btn { min-width:0; min-height:78px; padding:12px; display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:11px; color:#243a32; background:#fff; border:1px solid #cbd7d1; border-radius:10px; font:inherit; text-align:right; cursor:pointer; box-shadow:0 2px 7px rgba(22,61,48,.035); transition:background .15s,border-color .15s,transform .15s,box-shadow .15s; }
+  .developer-btn:hover,.developer-btn:focus-visible { background:#f1faf5; border-color:#1b8354; transform:translateY(-2px); box-shadow:0 7px 16px rgba(27,131,84,.1); }
+  .developer-btn-icon { width:38px; height:38px; display:grid; place-items:center; color:#166a45; background:#eef8f3; border-radius:9px; }
+  .developer-btn-icon svg { width:20px; height:20px; }
+  .developer-btn-copy { min-width:0; display:block; }
+  .developer-btn-copy strong { display:block; color:#243a32; font-family:"IBM Plex Sans","Segoe UI",Arial,sans-serif; font-size:14px; line-height:1.35; }
+  .developer-btn-copy small { display:block; margin-top:3px; color:#60726b; font-size:10px; font-weight:500; line-height:1.45; white-space:normal; }
+  .developer-format { padding:3px 6px; color:#166a45; background:#eef8f3; border-radius:5px; font-family:"IBM Plex Sans","Segoe UI",Arial,sans-serif; font-size:9px; font-weight:700; direction:ltr; }
+  .developer-note { margin:0; padding-top:12px; display:flex; align-items:center; gap:7px; color:#60726b; border-top:1px solid #dce6e1; font-size:11px; }
+  .developer-note svg { flex:0 0 auto; width:17px; height:17px; color:#1b8354; }
+  @media(max-width:900px){.developer-actions{grid-template-columns:1fr}.developer-btn{min-height:70px}.developer-heading{grid-template-columns:auto minmax(0,1fr)}.developer-filter-badge{grid-column:2}}
+  @media(max-width:600px){.data-provenance{margin-inline:14px}.developer-access{padding:14px;gap:13px}.developer-heading{grid-template-columns:auto minmax(0,1fr);align-items:start}.developer-heading-icon{width:42px;height:42px}.developer-heading h3{font-size:15px}.developer-filter-badge{grid-column:1/-1;justify-self:start}.developer-actions{gap:8px}.developer-btn{min-height:68px;padding:10px}.developer-note{align-items:flex-start;line-height:1.6}}
 </style>
 <style id="data-toolbar-layout-final">
   #dataTablePanel .toolbar {
@@ -8591,7 +8654,6 @@
       apply('.toolbar-btn-excel','nds-primary','nds-md');
       apply('.developer-btn','nds-secondary-outline','nds-md');
       apply('.repi-chart-action','nds-secondary-outline','nds-md');
-      apply('.provenance-main > a','nds-secondary-outline','nds-md');
       apply('.page-btn','nds-subtle','nds-md');
       document.querySelectorAll('.page-btn').forEach(button=>{if(button.classList.contains('active')){button.classList.remove('nds-subtle');button.classList.add('nds-primary')}});
     };
@@ -8956,6 +9018,11 @@
   html,body { max-width:100%; }
   body { overflow-x:hidden; }
   img,svg,canvas { max-width:100%; }
+  /* Keep native link states inside the visual identity. :where() keeps this
+     deliberately low-specificity so component colors (such as white button
+     labels) continue to win. */
+  a:where(:link,:visited,:hover,:active) { color:#1b8354; }
+  a:where(:focus-visible) { outline:3px solid rgba(27,131,84,.34); outline-offset:3px; border-radius:3px; }
   button,input,select,a { -webkit-tap-highlight-color:rgba(27,131,84,.14); }
   @media(max-width:600px){
     input.control,select.control,#pageSize {
@@ -9072,6 +9139,236 @@
     #chartsPanel .repi-chart-action span { font-size:12px !important; }
   }
 </style>
+<style id="comparison-tool-styles">
+  .view-tabs { display:grid !important; grid-template-columns:repeat(3,minmax(0,1fr)) !important; gap:0 !important; }
+  .view-tab { min-width:0 !important; width:100% !important; justify-content:center !important; text-align:center !important; }
+  .comparison-panel { padding:22px 24px 26px; }
+  .comparison-intro { display:flex; align-items:end; justify-content:space-between; gap:20px; margin-bottom:18px; }
+  .comparison-kicker { display:inline-flex; margin-bottom:6px; padding:4px 9px; color:#166a45; background:#eef8f3; border-radius:999px; font-size:12px; font-weight:700; }
+  .comparison-intro h3 { margin:0; color:#163d30; font-size:25px; line-height:1.4; }
+  .comparison-intro p { margin:5px 0 0; color:#60726b; font-size:14px; }
+  .comparison-limit { flex:0 0 auto; padding:6px 10px; color:#52605a; background:#f3f4f6; border-radius:6px; font-size:12px; }
+  .comparison-controls { display:grid; grid-template-columns:1.2fr 1fr 44px 1fr; gap:10px; align-items:end; padding:16px; border:1px solid #d9dfdc; border-radius:9px; background:#f8faf9; }
+  .comparison-field { display:grid; gap:5px; min-width:0; }
+  .comparison-field label,.comparison-items legend { color:#34433c; font-size:12px; font-weight:700; }
+  .comparison-field select { width:100%; min-height:46px; padding:8px 11px; color:#243a32; background:#fff; border:1px solid #9da4ae; border-radius:6px; font:inherit; }
+  .comparison-field select:focus-visible { outline:3px solid #000; outline-offset:2px; }
+  .comparison-swap { width:44px; height:46px; display:grid; place-items:center; color:#166a45; background:#fff; border:1px solid #9da4ae; border-radius:6px; cursor:pointer; }
+  .comparison-swap:hover { background:#eef8f3; border-color:#1b8354; }
+  .comparison-swap svg { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .comparison-items { margin:12px 0 0; padding:13px 15px 15px; border:1px solid #d9dfdc; border-radius:9px; }
+  .comparison-items legend { padding-inline:6px; }
+  .comparison-checks { display:flex; flex-wrap:wrap; gap:8px; }
+  .comparison-check { position:relative; }
+  .comparison-check input { position:absolute; opacity:0; pointer-events:none; }
+  .comparison-check span { min-height:38px; padding:7px 11px; display:inline-flex; align-items:center; gap:7px; color:#34433c; background:#fff; border:1px solid #c6cfca; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer; }
+  .comparison-check span::before { content:""; width:14px; height:14px; border:1.5px solid #7c8983; border-radius:3px; background:#fff; }
+  .comparison-check input:checked + span { color:#166a45; background:#eef8f3; border-color:#1b8354; }
+  .comparison-check input:checked + span::before { content:"✓"; display:grid; place-items:center; color:#fff; background:#1b8354; border-color:#1b8354; font-size:10px; }
+  .comparison-check input:focus-visible + span { outline:3px solid #000; outline-offset:2px; }
+  .comparison-check input:disabled + span { opacity:.45; cursor:not-allowed; }
+  .comparison-actions { display:flex; flex-wrap:wrap; gap:7px; margin:12px 0 18px; }
+  .comparison-actions button { min-height:40px; padding:7px 11px; color:#243a32; background:#fff; border:1px solid #9da4ae; border-radius:6px; font:inherit; font-size:12px; font-weight:700; cursor:pointer; }
+  .comparison-actions button:hover { color:#166a45; background:#eef8f3; border-color:#1b8354; }
+  .comparison-actions #comparisonExcel { color:#fff; background:#1b8354; border-color:#1b8354; }
+  .comparison-actions #comparisonPdf { color:#0b6944; background:#eef8f3; border-color:#9fd2ba; }
+  .comparison-actions #comparisonPdf:hover,.comparison-actions #comparisonPdf:focus-visible { color:#fff; background:#166a45; border-color:#166a45; }
+  .comparison-summary { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-bottom:14px; }
+  .comparison-card { min-width:0; padding:14px; border:1px solid #d9dfdc; border-radius:8px; background:#fff; }
+  .comparison-card-name { display:block; min-height:42px; color:#34433c; font-size:13px; font-weight:700; line-height:1.55; }
+  .comparison-card-value { display:block; margin-top:7px; color:#163d30; font-family:"IBM Plex Sans",Arial,sans-serif; font-size:27px; font-weight:700; line-height:1.2; }
+  .comparison-card-change { display:inline-flex; margin-top:8px; padding:3px 7px; border-radius:999px; font-family:"IBM Plex Sans",Arial,sans-serif; font-size:12px; font-weight:700; direction:ltr; }
+  .comparison-card-change.up { color:#087a4c; background:#eaf8f1; }
+  .comparison-card-change.down { color:#b42318; background:#fff0ee; }
+  .comparison-card-change.flat { color:#52605a; background:#f3f4f6; }
+  .comparison-card-caption { display:block; margin-top:6px; color:#7a8982; font-size:11px; }
+  .comparison-visual { overflow:hidden; border:1px solid #d2d6db; border-radius:10px; background:#fff; }
+  .comparison-visual-head { padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:15px; border-bottom:1px solid #e5e7eb; background:#fbfcfb; }
+  .comparison-visual-head h4 { margin:0; color:#243a32; font-size:17px; }
+  .comparison-visual-head p { margin:3px 0 0; color:#60726b; font-size:12px; }
+  .comparison-legend { display:flex; flex-wrap:wrap; gap:12px; color:#52605a; font-size:12px; }
+  .comparison-legend span { display:inline-flex; align-items:center; gap:6px; }
+  .comparison-legend i { width:10px; height:10px; border-radius:50%; }
+  .comparison-legend i.current { background:#1b8354; }.comparison-legend i.base { background:#7c8983; }
+  .comparison-chart-toolbar { display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap; gap:8px 12px; }
+  .comparison-chart-toolbar > label { color:#60726b; font-size:11px; font-weight:700; }
+  .comparison-chart-toolbar select { min-height:36px; padding:5px 9px; color:#34433c; background:#fff; border:1px solid #aeb7b2; border-radius:6px; font:inherit; font-size:12px; }
+  .comparison-chart-toolbar button { min-height:36px; padding:5px 10px; color:#166a45; background:#eef8f3; border:1px solid #b9ddcc; border-radius:6px; font:inherit; font-size:12px; font-weight:700; cursor:pointer; }
+  .comparison-chart-wrap { position:relative; min-height:360px; padding:5px 12px 10px; overflow-x:auto; }
+  #comparisonChart { display:block; width:100%; min-width:720px; height:auto; }
+  #comparisonChart text { fill:#52605a; font-family:inherit; font-size:12px; }
+  #comparisonChart .grid { stroke:#e5e7eb; stroke-width:1; }
+  #comparisonChart .axis { stroke:#9da4ae; stroke-width:1; }
+  #comparisonChart .comparison-row-band { fill:#fff; fill-opacity:.84; }
+  #comparisonChart .comparison-row-band.is-alt { fill:#fafbfa; }
+  #comparisonChart .comparison-link { stroke:#c8d1cc; stroke-width:5; stroke-linecap:round; }
+  #comparisonChart .comparison-value-current { fill:#166a45; font-family:"IBM Plex Sans",Arial,sans-serif; font-size:12px; font-weight:700; }
+  #comparisonChart .comparison-value-base { fill:#52605a; font-family:"IBM Plex Sans",Arial,sans-serif; font-size:11px; font-weight:600; }
+  #comparisonChart .comparison-delta-positive { fill:#eaf8f1; stroke:#b9ddcc; }
+  #comparisonChart .comparison-delta-negative { fill:#fff0ee; stroke:#f1c4be; }
+  #comparisonChart .comparison-delta-text { font-family:"IBM Plex Sans",Arial,sans-serif; font-size:11px; font-weight:700; }
+  #comparisonChart .comparison-delta-text.positive { fill:#087a4c; }
+  #comparisonChart .comparison-delta-text.negative { fill:#b42318; }
+  #comparisonChart .simple-column-label { fill:#7a8982; font-size:11px; font-weight:600; }
+  #comparisonChart .simple-column-period { fill:#243a32; font-family:"IBM Plex Sans",Arial,sans-serif; font-size:13px; font-weight:700; }
+  #comparisonChart .simple-value-box-base { fill:#f3f4f6; stroke:#c9d1cd; }
+  #comparisonChart .simple-value-box-current { fill:#eef8f3; stroke:#b9ddcc; }
+  #comparisonChart .simple-value-base { fill:#405a51; font-family:"IBM Plex Sans",Arial,sans-serif; font-size:18px; font-weight:700; }
+  #comparisonChart .simple-value-current { fill:#087a4c; font-family:"IBM Plex Sans",Arial,sans-serif; font-size:18px; font-weight:700; }
+  #comparisonChart .simple-direction-up { fill:#eaf8f1; stroke:#b9ddcc; }
+  #comparisonChart .simple-direction-down { fill:#fff0ee; stroke:#f1c4be; }
+  #comparisonChart .simple-direction-flat { fill:#f3f4f6; stroke:#d2d6db; }
+  #comparisonChart .simple-direction-symbol { font-size:18px; font-weight:800; }
+  #comparisonChart .simple-direction-symbol.up { fill:#087a4c; }
+  #comparisonChart .simple-direction-symbol.down { fill:#b42318; }
+  #comparisonChart .simple-direction-symbol.flat { fill:#60726b; }
+  #comparisonChart .simple-diff { fill:#60726b; font-family:"IBM Plex Sans",Arial,sans-serif; font-size:10px; font-weight:600; }
+  #comparisonChart .comparison-row { cursor:pointer; transition:opacity .18s ease; outline:none; animation:comparisonRowIn .34s ease both; }
+  #comparisonChart .comparison-row:nth-of-type(2){animation-delay:.04s}#comparisonChart .comparison-row:nth-of-type(3){animation-delay:.08s}#comparisonChart .comparison-row:nth-of-type(4){animation-delay:.12s}
+  @keyframes comparisonRowIn { from{opacity:0;transform:translateY(7px)} to{opacity:1;transform:translateY(0)} }
+  #comparisonChart .comparison-row .comparison-row-band { transition:fill .18s ease,stroke .18s ease; }
+  #comparisonChart .comparison-row:hover .comparison-row-band,
+  #comparisonChart .comparison-row:focus .comparison-row-band,
+  #comparisonChart .comparison-row.is-active .comparison-row-band { fill:#eef8f3; stroke:#b9ddcc; }
+  #comparisonChart.has-focus .comparison-row:not(.is-active) { opacity:.22; }
+  #comparisonChart .comparison-row circle { transition:r .16s ease,filter .16s ease; }
+  #comparisonChart .comparison-row:hover circle,
+  #comparisonChart .comparison-row:focus circle,
+  #comparisonChart .comparison-row.is-active circle { filter:drop-shadow(0 3px 4px rgba(22,61,48,.22)); }
+  .comparison-chart-tooltip { position:absolute; z-index:5; min-width:220px; max-width:290px; padding:13px 14px; color:#29483d; background:#f2faf6; border:1px solid #9fd2ba; border-radius:12px; box-shadow:0 14px 32px rgba(22,106,69,.16); font-size:12px; line-height:1.65; pointer-events:none; transform:translate(-50%,calc(-100% - 12px)); }
+  .comparison-chart-tooltip strong { display:block; margin-bottom:7px; padding-bottom:6px; color:#0b6944; border-bottom:1px solid #cfe8dc; font-size:13px; }
+  .comparison-chart-tooltip dl { margin:0; display:grid; grid-template-columns:1fr auto; gap:2px 12px; }
+  .comparison-chart-tooltip dt { color:#60786f; }.comparison-chart-tooltip dd { margin:0; color:#24453a; direction:ltr; text-align:left; font-family:"IBM Plex Sans",Arial,sans-serif; font-weight:700; }
+  .comparison-chart-tooltip .tooltip-change-up { color:#087a4c; }.comparison-chart-tooltip .tooltip-change-down { color:#b42318; }
+  .comparison-table-wrap { margin-top:14px; overflow:auto; border:1px solid #d2d6db; border-radius:8px; }
+  .comparison-table-head { margin-top:20px; display:flex; align-items:end; justify-content:space-between; gap:16px; }
+  .comparison-table-head h4 { margin:0; color:#243a32; font-size:17px; }
+  .comparison-table-head p { margin:3px 0 0; color:#60726b; font-size:12px; }
+  .comparison-table-head > span { padding:4px 9px; color:#166a45; background:#eef8f3; border-radius:999px; font-size:12px; font-weight:700; }
+  .comparison-table-wrap table { width:100%; min-width:760px; table-layout:fixed; border-collapse:separate; border-spacing:0; background:#fff; }
+  .comparison-table-wrap .comparison-col-name { width:30%; }
+  .comparison-table-wrap .comparison-col-value { width:18.5%; }
+  .comparison-table-wrap .comparison-col-change { width:16.5%; }
+  .comparison-table-wrap th,.comparison-table-wrap td { padding:12px 14px; text-align:right; border-bottom:1px solid #e5e7eb; }
+  .comparison-table-wrap th { position:sticky; top:0; z-index:2; color:#243a32; background:#f3f4f6; border-bottom:2px solid #bcc6c1; font-size:13px; white-space:nowrap; }
+  .comparison-table-wrap td { color:#405a51; font-size:13px; }
+  .comparison-table-wrap tbody tr:nth-child(even) { background:#fafbfa; }
+  .comparison-table-wrap tbody tr:hover { background:#eef8f3; }
+  .comparison-table-wrap th:first-child,.comparison-table-wrap td:first-child { padding-inline:20px; text-align:right; }
+  .comparison-table-wrap td:first-child { color:#243a32; font-weight:700; }
+  .comparison-table-wrap th:not(:first-child),.comparison-table-wrap td:not(:first-child) { text-align:center !important; }
+  .comparison-table-wrap th:nth-child(2),.comparison-table-wrap td:nth-child(2) { background:#f1f9f5; }
+  .comparison-table-wrap th:nth-child(2) { color:#166a45; }
+  .comparison-table-wrap td:nth-child(4),.comparison-table-wrap td:nth-child(5) { font-weight:700; }
+  .comparison-table-value { color:#243a32; font-size:15px; font-weight:600; }
+  .comparison-table-value.current { color:#166a45; font-weight:700; }
+  .comparison-metric-pill { min-width:78px; padding:5px 9px; display:inline-flex; align-items:center; justify-content:center; gap:5px; border-radius:999px; font-size:12px; font-weight:700; line-height:1.35; direction:ltr; }
+  .comparison-metric-pill.positive { color:#087a4c; background:#eaf8f1; border:1px solid #c5e8d6; }
+  .comparison-metric-pill.negative { color:#b42318; background:#fff0ee; border:1px solid #f2ccc7; }
+  .comparison-metric-pill.neutral { color:#52605a; background:#f3f4f6; border:1px solid #e1e5e3; }
+  .comparison-metric-arrow { font-size:13px; line-height:1; }
+  .comparison-table-wrap td:not(:first-child) { direction:ltr; text-align:left; font-family:"IBM Plex Sans",Arial,sans-serif; font-variant-numeric:tabular-nums; }
+  @media(max-width:900px){.comparison-controls{grid-template-columns:1fr 1fr}.comparison-swap{grid-column:1/-1;justify-self:center;transform:rotate(90deg)}.comparison-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:600px){
+    .view-tabs { display:flex !important; overflow-x:auto !important; gap:14px !important; }
+    .view-tab { flex:0 0 auto !important; width:auto !important; min-width:128px !important; font-size:14px !important; }
+    .comparison-panel { padding:17px 14px 20px; }
+    .comparison-intro { align-items:start; flex-direction:column; gap:9px; }
+    .comparison-intro h3 { font-size:21px; }.comparison-limit{white-space:normal}
+    .comparison-controls { grid-template-columns:1fr; padding:12px; }
+    .comparison-swap { grid-column:auto; justify-self:center; transform:rotate(90deg); }
+    .comparison-field select { min-height:48px; font-size:16px; }
+    .comparison-checks { flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px; }
+    .comparison-check { flex:0 0 auto; }
+    .comparison-actions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .comparison-actions button { min-height:44px; }
+    .comparison-actions #comparisonExcel { grid-column:1/-1; }
+    .comparison-summary { grid-template-columns:1fr; }
+    .comparison-card-name { min-height:0; }.comparison-card-value{font-size:24px}
+    .comparison-visual-head,.comparison-table-head { align-items:start; flex-direction:column; }
+    .comparison-chart-toolbar { width:100%; justify-content:flex-start; }
+    .comparison-chart-wrap { min-height:300px; padding:7px; -webkit-overflow-scrolling:touch; }
+    .comparison-table-wrap th:first-child,.comparison-table-wrap td:first-child { position:sticky; right:0; z-index:1; background:#fff; box-shadow:-7px 0 10px -10px rgba(22,31,45,.45); }
+    .comparison-table-wrap th:first-child { z-index:3; background:#f3f4f6; }
+  }
+</style>
+<script id="comparison-tool-script">
+  (()=>{
+    const data=window.NEWSLETTER_DATA,panel=document.getElementById('comparePanel');if(!data||!panel)return;
+    const sector=data.datasets.find(d=>d.columns.includes('القطاع ونوع العقار')&&d.columns.includes('العام'));
+    const region=data.datasets.find(d=>d.columns.includes('المنطقة الإدارية'));
+    const qShort={'الربع الأول':'Q1','الربع الثاني':'Q2','الربع الثالث':'Q3','الربع الرابع':'Q4'};
+    const colors={current:'#1b8354',base:'#7c8983'};
+    const els={scope:document.getElementById('comparisonScope'),current:document.getElementById('comparisonCurrent'),base:document.getElementById('comparisonBase'),checks:document.getElementById('comparisonChecks'),summary:document.getElementById('comparisonSummary'),chart:document.getElementById('comparisonChart'),subtitle:document.getElementById('comparisonChartSubtitle'),body:document.getElementById('comparisonTableBody'),currentHead:document.getElementById('comparisonCurrentHead'),baseHead:document.getElementById('comparisonBaseHead'),count:document.getElementById('comparisonResultCount'),sort:document.getElementById('comparisonSort'),tooltip:document.getElementById('comparisonChartTooltip'),clearFocus:document.getElementById('comparisonClearFocus')};
+    const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const num=v=>Number(v).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2});
+    const periodLabel=key=>{const [y,q]=key.split('|');return `${qShort[q]||q} ${y}`};
+    const source=()=>els.scope.value==='region'?region:sector;
+    const rows=()=>source().rows.filter(r=>r[1]!=='المتوسط السنوي');
+    const periods=()=>[...new Set(rows().map(r=>`${r[0]}|${r[1]}`))];
+    const names=()=>[...new Set(rows().map(r=>r[2]))].filter(n=>els.scope.value!=='region'||n!=='الرقم القياسي العام');
+    const defaults=()=>els.scope.value==='region'?['الرياض','مكة المكرمة','المنطقة الشرقية','الجوف']:['الرقم القياسي العام','جملة السكني','جملة التجاري','جملة الزراعي'];
+    let selected=[];
+    const value=(name,key)=>{const [year,quarter]=key.split('|'),row=rows().find(r=>String(r[0])===year&&r[1]===quarter&&r[2]===name);return row?Number(row[3]):null};
+    function setPeriods(){const list=periods(),last=list.at(-1),[lastYear,lastQuarter]=last.split('|'),preferred=`${Number(lastYear)-1}|${lastQuarter}`;els.current.innerHTML=list.map(k=>`<option value="${esc(k)}">${esc(periodLabel(k))}</option>`).join('');els.base.innerHTML=els.current.innerHTML;els.current.value=last;els.base.value=list.includes(preferred)?preferred:list.at(-2)}
+    function renderChecks(){const all=names();els.checks.innerHTML=all.map((name,i)=>`<label class="comparison-check"><input type="checkbox" value="${esc(name)}" ${selected.includes(name)?'checked':''} ${!selected.includes(name)&&selected.length>=4?'disabled':''}><span>${esc(name)}</span></label>`).join('');els.checks.querySelectorAll('input').forEach(input=>input.addEventListener('change',()=>{if(input.checked){if(selected.length>=4){input.checked=false;return}selected.push(input.value)}else selected=selected.filter(x=>x!==input.value);render()}))}
+    function resultRows(){const result=selected.map((name,order)=>{const current=value(name,els.current.value),base=value(name,els.base.value),diff=current!=null&&base!=null?current-base:null,pct=diff!=null&&base?diff/base*100:null;return{name,current,base,diff,pct,order}});if(els.sort.value==='increase')result.sort((a,b)=>(b.pct??-Infinity)-(a.pct??-Infinity));if(els.sort.value==='decrease')result.sort((a,b)=>(a.pct??Infinity)-(b.pct??Infinity));if(els.sort.value==='current')result.sort((a,b)=>(b.current??-Infinity)-(a.current??-Infinity));return result}
+    function bindChartInteractions(){
+      const wrap=els.chart.closest('.comparison-chart-wrap'),chartRows=[...els.chart.querySelectorAll('.comparison-row')];
+      const show=(row,event)=>{const changeClass=row.dataset.pct.startsWith('-')?'tooltip-change-down':'tooltip-change-up';els.tooltip.innerHTML=`<strong>${esc(row.dataset.name)}</strong><dl><dt>${esc(periodLabel(els.current.value))}</dt><dd>${esc(row.dataset.current)}</dd><dt>${esc(periodLabel(els.base.value))}</dt><dd>${esc(row.dataset.base)}</dd><dt>الفرق</dt><dd>${esc(row.dataset.diff)}</dd><dt>نسبة التغير</dt><dd class="${changeClass}">${esc(row.dataset.pct)}</dd></dl>`;els.tooltip.hidden=false;const box=wrap.getBoundingClientRect(),point=event?.clientX!=null?{x:event.clientX-box.left+wrap.scrollLeft,y:event.clientY-box.top+wrap.scrollTop}:(()=>{const b=row.getBoundingClientRect();return{x:b.left-box.left+b.width/2+wrap.scrollLeft,y:b.top-box.top+18+wrap.scrollTop}})(),minX=wrap.scrollLeft+135,maxX=wrap.scrollLeft+wrap.clientWidth-135;els.tooltip.style.left=`${Math.max(minX,Math.min(maxX,point.x))}px`;els.tooltip.style.top=`${Math.max(wrap.scrollTop+115,point.y)}px`};
+      const hide=()=>{if(!els.chart.classList.contains('has-focus'))els.tooltip.hidden=true};
+      chartRows.forEach(row=>{row.addEventListener('pointermove',e=>show(row,e));row.addEventListener('pointerleave',hide);row.addEventListener('focus',()=>show(row));row.addEventListener('blur',hide);row.addEventListener('click',()=>{const active=row.classList.contains('is-active');chartRows.forEach(r=>r.classList.remove('is-active'));els.chart.classList.toggle('has-focus',!active);if(!active){row.classList.add('is-active');show(row)}else els.tooltip.hidden=true;els.clearFocus.hidden=active});row.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();row.click()}if(e.key==='Escape')els.clearFocus.click()})});
+      els.clearFocus.onclick=()=>{chartRows.forEach(r=>r.classList.remove('is-active'));els.chart.classList.remove('has-focus');els.tooltip.hidden=true;els.clearFocus.hidden=true};
+    }
+    function renderChart(results){
+      els.chart.classList.remove('has-focus');els.clearFocus.hidden=true;els.tooltip.hidden=true;
+      const W=900,T=72,B=34,rowH=84,H=Math.max(300,T+B+rowH*Math.max(1,results.length));
+      els.chart.setAttribute('viewBox',`0 0 ${W} ${H}`);
+      const vals=results.flatMap(r=>[r.current,r.base]).filter(Number.isFinite);
+      if(!vals.length){els.chart.innerHTML=`<rect x="170" y="110" width="560" height="120" rx="12" fill="#f8faf9" stroke="#d9dfdc"/><text x="450" y="178" text-anchor="middle">اختر عنصرًا واحدًا على الأقل لعرض المقارنة</text>`;return}
+      let out=`<text class="simple-column-label" x="345" y="20" text-anchor="middle">القيمة السابقة</text><text class="simple-column-period" x="345" y="43" text-anchor="middle">${esc(periodLabel(els.base.value))}</text><text class="simple-column-label" x="585" y="20" text-anchor="middle">القيمة الحالية</text><text class="simple-column-period" x="585" y="43" text-anchor="middle">${esc(periodLabel(els.current.value))}</text><text class="simple-column-label" x="785" y="31" text-anchor="middle">نسبة التغير</text>`;
+      results.forEach((r,i)=>{const y=T+rowH*(i+.5),pct=r.pct??0,delta=`${pct>0?'+':''}${num(pct)}%`,diff=`${r.diff>0?'+':''}${num(r.diff)}`,state=pct>0?'up':pct<0?'down':'flat',symbol=pct>0?'↑':pct<0?'↓':'—',bandY=T+rowH*i,badgeClass=pct>=0?'comparison-delta-positive':'comparison-delta-negative',textClass=pct>=0?'positive':'negative';out+=`<g class="comparison-row" tabindex="0" role="button" aria-label="${esc(r.name)}، القيمة السابقة ${esc(num(r.base))}، القيمة الحالية ${esc(num(r.current))}، التغير ${esc(delta)}" data-name="${esc(r.name)}" data-current="${esc(num(r.current))}" data-base="${esc(num(r.base))}" data-diff="${esc(diff)}" data-pct="${esc(delta)}"><rect class="comparison-row-band ${i%2===0?'is-alt':''}" x="0" y="${bandY+2}" width="${W}" height="${rowH-4}" rx="7"/><rect class="simple-value-box-base" x="280" y="${y-25}" width="130" height="50" rx="9"/><text class="simple-value-base" x="345" y="${y+7}" text-anchor="middle">${esc(num(r.base))}</text><circle class="simple-direction-${state}" cx="465" cy="${y-5}" r="20"/><text class="simple-direction-symbol ${state}" x="465" y="${y+2}" text-anchor="middle">${symbol}</text><text class="simple-diff" x="465" y="${y+27}" text-anchor="middle">${esc(diff)}</text><rect class="simple-value-box-current" x="520" y="${y-25}" width="130" height="50" rx="9"/><text class="simple-value-current" x="585" y="${y+7}" text-anchor="middle">${esc(num(r.current))}</text><rect class="${badgeClass}" x="728" y="${y-19}" width="114" height="38" rx="19"/><text class="comparison-delta-text ${textClass}" x="785" y="${y+5}" text-anchor="middle">${esc(delta)}</text><text class="comparison-item-name" x="135" y="${y+5}" text-anchor="middle" direction="rtl" font-weight="700">${esc(r.name)}</text></g>`});
+      out+=`<text x="450" y="${H-8}" text-anchor="middle" fill="#7a8982" font-size="11">السهم يوضح اتجاه التغير من الفترة السابقة إلى الفترة الحالية</text>`;
+      els.chart.innerHTML=out;bindChartInteractions()
+    }
+    function render(){
+      renderChecks();
+      const results=resultRows(),currentLabel=periodLabel(els.current.value),baseLabel=periodLabel(els.base.value);
+      els.currentHead.textContent=currentLabel;els.baseHead.textContent=baseLabel;els.count.textContent=`${results.length} ${results.length===1?'عنصر':'عناصر'}`;
+      els.subtitle.textContent=`من ${baseLabel} إلى ${currentLabel} — السهم يوضح الارتفاع أو الانخفاض`;
+      els.summary.innerHTML=results.map(r=>{const cls=r.pct>0?'up':r.pct<0?'down':'flat',sign=r.pct>0?'+':'';return `<article class="comparison-card"><span class="comparison-card-name">${esc(r.name)}</span><strong class="comparison-card-value">${r.current==null?'—':esc(num(r.current))}</strong><span class="comparison-card-change ${cls}">${r.pct==null?'—':`${sign}${num(r.pct)}%`}</span><small class="comparison-card-caption">مقارنةً بـ ${esc(baseLabel)}</small></article>`}).join('');
+      els.body.innerHTML=results.map(r=>{
+        const state=r.pct>0?'positive':r.pct<0?'negative':'neutral',arrow=r.pct>0?'↑':r.pct<0?'↓':'—',diff=r.diff==null?'—':`${r.diff>0?'+':''}${num(r.diff)}`,pct=r.pct==null?'—':`${r.pct>0?'+':''}${num(r.pct)}%`;
+        return `<tr><td>${esc(r.name)}</td><td><span class="comparison-table-value current">${r.current==null?'—':esc(num(r.current))}</span></td><td><span class="comparison-table-value">${r.base==null?'—':esc(num(r.base))}</span></td><td><span class="comparison-metric-pill ${state}">${esc(diff)}</span></td><td><span class="comparison-metric-pill ${state}"><span class="comparison-metric-arrow" aria-hidden="true">${arrow}</span>${esc(pct)}</span></td></tr>`
+      }).join('');
+      renderChart(results)
+    }
+    function reset(){selected=defaults().filter(n=>names().includes(n)).slice(0,4);setPeriods();render()}
+    els.scope.addEventListener('change',reset);els.current.addEventListener('change',render);els.base.addEventListener('change',render);els.sort.addEventListener('change',render);
+    document.getElementById('comparisonSwap').onclick=()=>{const a=els.current.value;els.current.value=els.base.value;els.base.value=a;render()};document.getElementById('comparisonReset').onclick=reset;
+    const download=(blob,name)=>{const a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+    const svgSource=()=>{
+      const NS='http://www.w3.org/2000/svg',clone=els.chart.cloneNode(true),parts=(clone.getAttribute('viewBox')||'0 0 900 420').split(/\s+/).map(Number),W=parts[2]||900,H=parts[3]||420,headerH=78;
+      clone.setAttribute('xmlns',NS);clone.setAttribute('viewBox',`0 0 ${W} ${H+headerH}`);clone.setAttribute('width',String(W));clone.setAttribute('height',String(H+headerH));
+      const content=document.createElementNS(NS,'g');content.setAttribute('transform',`translate(0 ${headerH})`);while(clone.firstChild)content.appendChild(clone.firstChild);
+      const background=document.createElementNS(NS,'rect');background.setAttribute('width',String(W));background.setAttribute('height',String(H+headerH));background.setAttribute('fill','#fff');
+      const style=document.createElementNS(NS,'style');style.textContent=`text{font-family:"IBM Plex Sans Arabic","Noto Sans Arabic","Segoe UI",Tahoma,Arial,sans-serif;fill:#405a51}.export-title{fill:#163d30;font-size:20px;font-weight:700}.export-subtitle{fill:#60726b;font-size:12px}.comparison-item-name{fill:#405a51;font-size:12px;font-weight:700}.simple-column-label{fill:#7a8982;font-size:11px;font-weight:600}.simple-column-period{fill:#243a32;font-family:"IBM Plex Sans","Segoe UI",Arial,sans-serif;font-size:13px;font-weight:700}.comparison-row-band{fill:#fff;stroke:none}.comparison-row-band.is-alt{fill:#fafbfa}.simple-value-box-base{fill:#f3f4f6;stroke:#c9d1cd}.simple-value-box-current{fill:#eef8f3;stroke:#b9ddcc}.simple-value-base{fill:#405a51;font-family:"IBM Plex Sans","Segoe UI",Arial,sans-serif;font-size:18px;font-weight:700}.simple-value-current{fill:#087a4c;font-family:"IBM Plex Sans","Segoe UI",Arial,sans-serif;font-size:18px;font-weight:700}.simple-direction-up{fill:#eaf8f1;stroke:#b9ddcc}.simple-direction-down{fill:#fff0ee;stroke:#f1c4be}.simple-direction-flat{fill:#f3f4f6;stroke:#d2d6db}.simple-direction-symbol{font-size:18px;font-weight:700}.simple-direction-symbol.up,.comparison-delta-text.positive{fill:#087a4c}.simple-direction-symbol.down,.comparison-delta-text.negative{fill:#b42318}.simple-direction-symbol.flat{fill:#60726b}.simple-diff{fill:#60726b;font-family:"IBM Plex Sans","Segoe UI",Arial,sans-serif;font-size:10px;font-weight:600}.comparison-delta-positive{fill:#eaf8f1;stroke:#b9ddcc}.comparison-delta-negative{fill:#fff0ee;stroke:#f1c4be}.comparison-delta-text{font-family:"IBM Plex Sans","Segoe UI",Arial,sans-serif;font-size:11px;font-weight:700}`;
+      const title=document.createElementNS(NS,'text');title.setAttribute('class','export-title');title.setAttribute('x',String(W/2));title.setAttribute('y','30');title.setAttribute('text-anchor','middle');title.setAttribute('direction','rtl');title.textContent='مقارنة بيانات أسعار العقارات';
+      const subtitle=document.createElementNS(NS,'text');subtitle.setAttribute('class','export-subtitle');subtitle.setAttribute('x',String(W/2));subtitle.setAttribute('y','54');subtitle.setAttribute('text-anchor','middle');subtitle.setAttribute('direction','rtl');subtitle.textContent=`من ${periodLabel(els.base.value)} إلى ${periodLabel(els.current.value)} — سنة الأساس 2023 = 100`;
+      clone.append(background,style,title,subtitle,content);return new XMLSerializer().serializeToString(clone)
+    };
+    document.getElementById('comparisonSvg').onclick=async()=>{if(document.fonts?.ready)await document.fonts.ready;download(new Blob([svgSource()],{type:'image/svg+xml;charset=utf-8'}),'مقارنة-بيانات-العقارات.svg')};
+    document.getElementById('comparisonPng').onclick=async()=>{if(document.fonts?.ready)await document.fonts.ready;const url=URL.createObjectURL(new Blob([svgSource()],{type:'image/svg+xml;charset=utf-8'})),img=new Image();img.onload=()=>{const canvas=document.createElement('canvas'),ratio=(img.naturalHeight||img.height)/(img.naturalWidth||img.width)||.56;canvas.width=1800;canvas.height=Math.round(canvas.width*ratio);const ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);canvas.toBlob(b=>{download(b,'مقارنة-بيانات-العقارات.png');URL.revokeObjectURL(url)},'image/png',1)};img.onerror=()=>{URL.revokeObjectURL(url);alert('تعذر تجهيز الصورة. يمكن تنزيل SVG كبديل عالي الجودة.')};img.src=url};
+    document.getElementById('comparisonPdf').onclick=async()=>{
+      const report=window.open('','_blank');if(!report){alert('يرجى السماح بالنوافذ المنبثقة لتجهيز ملف PDF.');return}report.opener=null;window.showDownloadToast?.('تم فتح معاينة الطباعة — اختر حفظ كملف PDF');if(document.fonts?.ready)await document.fonts.ready;
+      const rs=resultRows(),current=periodLabel(els.current.value),base=periodLabel(els.base.value),chart='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svgSource()),rows=rs.map(r=>{const pct=r.pct==null?'—':`${r.pct>0?'+':''}${num(r.pct)}%`,diff=r.diff==null?'—':`${r.diff>0?'+':''}${num(r.diff)}`,state=(r.pct??0)<0?'down':'up';return `<tr><td>${esc(r.name)}</td><td>${esc(num(r.current))}</td><td>${esc(num(r.base))}</td><td>${esc(diff)}</td><td><span class="${state}">${esc(pct)}</span></td></tr>`}).join('');
+      report.document.open();report.document.write(`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>مقارنة بيانات أسعار العقارات</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@500;600;700&display=swap" rel="stylesheet"><style>@page{size:A4 landscape;margin:11mm}*{box-sizing:border-box}body{margin:0;color:#243a32;background:#fff;font-family:"IBM Plex Sans Arabic","Segoe UI",Tahoma,Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}.sheet{border-top:6px solid #1b8354;padding-top:15px}.report-head{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-bottom:13px;border-bottom:1px solid #d7e2dc}.logo{width:180px;height:60px;object-fit:contain;object-position:right center}.head-copy{text-align:right}.head-copy h1{margin:0;color:#0b3b2e;font-size:25px;line-height:1.4}.head-copy p{margin:5px 0 0;color:#60726b;font-size:13px}.meta{display:flex;gap:9px;flex-wrap:wrap;margin:13px 0}.meta span{padding:6px 11px;color:#285444;background:#eef8f3;border:1px solid #c7e3d5;border-radius:999px;font-size:11px;font-weight:600}.chart{margin:8px 0 12px;padding:9px;border:1px solid #d7e2dc;border-radius:12px;background:#fff}.chart img{display:block;width:100%;max-height:390px;object-fit:contain}h2{margin:10px 0 7px;color:#0b3b2e;font-size:15px}table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:11px}th,td{padding:8px 10px;border:1px solid #d9e2dd;text-align:center}th{color:#164b36;background:#eaf5ef;font-weight:700}th:first-child,td:first-child{text-align:right;width:28%;font-weight:600}tbody tr:nth-child(even){background:#fafcfa}.up{color:#087a4c;font-weight:700}.down{color:#b42318;font-weight:700}.report-footer{display:flex;justify-content:space-between;gap:20px;margin-top:11px;padding-top:8px;border-top:1px solid #d7e2dc;color:#667a72;font-size:9px}.report-footer strong{color:#166a45}@media print{body{background:#fff}.sheet{break-inside:avoid}.no-print{display:none}}</style></head><body><main class="sheet"><header class="report-head"><div class="head-copy"><h1>مقارنة بيانات أسعار العقارات</h1><p>الرقم القياسي لأسعار العقارات — الربع الثاني 2026</p></div><img class="logo" src="https://www.stats.gov.sa/o/resources/images/logo/logo.svg" alt="شعار الهيئة العامة للإحصاء"></header><section class="meta"><span>الفترة الحالية: ${esc(current)}</span><span>فترة المقارنة: ${esc(base)}</span><span>سنة الأساس: 2023 = 100</span><span>النطاق: ${els.scope.value==='region'?'المناطق الإدارية':'القطاعات وأنواع العقارات'}</span></section><figure class="chart"><img src="${chart}" alt="رسم نتائج المقارنة"></figure><h2>جدول نتائج المقارنة</h2><table><thead><tr><th>العنصر</th><th>${esc(current)}</th><th>${esc(base)}</th><th>الفرق</th><th>نسبة التغير</th></tr></thead><tbody>${rows}</tbody></table><footer class="report-footer"><span><strong>الهيئة العامة للإحصاء</strong> — المملكة العربية السعودية</span><span>تاريخ إنشاء التقرير: ${new Intl.DateTimeFormat('ar-SA',{dateStyle:'long'}).format(new Date())}</span></footer></main><script>window.addEventListener('load',()=>setTimeout(()=>window.print(),700));<\/script></body></html>`);report.document.close()
+    };
+    document.getElementById('comparisonExcel').onclick=()=>{const rs=resultRows(),html=`<html dir="rtl"><meta charset="utf-8"><table border="1"><tr><th>العنصر</th><th>${esc(periodLabel(els.current.value))}</th><th>${esc(periodLabel(els.base.value))}</th><th>الفرق</th><th>نسبة التغير</th></tr>${rs.map(r=>`<tr><td>${esc(r.name)}</td><td>${r.current??''}</td><td>${r.base??''}</td><td>${r.diff??''}</td><td>${r.pct??''}</td></tr>`).join('')}</table></html>`;download(new Blob(['\ufeff'+html],{type:'application/vnd.ms-excel;charset=utf-8'}),'مقارنة-بيانات-العقارات.xls')};
+    document.getElementById('comparisonShare').onclick=async()=>{const u=new URL(location.href),p=new URLSearchParams();u.search='';p.set('view','compare');p.set('compare','1');p.set('cmpScope',els.scope.value);p.set('cmpCurrent',els.current.value);p.set('cmpBase',els.base.value);p.set('cmpItems',selected.join(','));p.set('cmpSort',els.sort.value);u.hash=p.toString();try{if(!navigator.clipboard?.writeText)throw new Error('clipboard unavailable');await navigator.clipboard.writeText(u.href)}catch(e){const t=document.createElement('textarea');t.value=u.href;t.readOnly=true;t.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;opacity:0';document.body.append(t);t.focus();t.select();t.setSelectionRange(0,t.value.length);const copied=document.execCommand('copy');t.remove();if(!copied)window.prompt('انسخ رابط المقارنة التالي:',u.href)}const b=document.getElementById('comparisonShare'),old=b.textContent;b.textContent='تم نسخ الرابط';b.classList.add('is-copied');setTimeout(()=>{b.textContent=old;b.classList.remove('is-copied')},1800)};
+    const hashParams=new URLSearchParams(location.hash.slice(1)),queryParams=new URLSearchParams(location.search),params=hashParams.get('compare')==='1'?hashParams:queryParams;setPeriods();selected=defaults();if(params.get('compare')==='1'||params.get('view')==='compare'){els.scope.value=params.get('cmpScope')==='region'?'region':'sector';setPeriods();if([...els.current.options].some(o=>o.value===params.get('cmpCurrent')))els.current.value=params.get('cmpCurrent');if([...els.base.options].some(o=>o.value===params.get('cmpBase')))els.base.value=params.get('cmpBase');if([...els.sort.options].some(o=>o.value===params.get('cmpSort')))els.sort.value=params.get('cmpSort');const requested=(params.get('cmpItems')||'').split(',').filter(n=>names().includes(n));if(requested.length)selected=requested.slice(0,4);setTimeout(()=>document.getElementById('compareTab')?.click(),0)}render();
+  })();
+</script>
 <footer id="gastat-page-footer" class="gastat-page-footer" aria-label="تذييل الموقع">
   <div class="gastat-footer-grid">
     <section class="gastat-footer-section gastat-footer-social" aria-labelledby="footer-follow-title">
@@ -9213,6 +9510,71 @@
     #gastat-page-footer { margin-top: 24px; padding: 36px 18px 18px; }
     #gastat-page-footer .gastat-footer-grid { grid-template-columns: 1fr; gap: 28px; }
     #gastat-page-footer .gastat-footer-bottom { align-items: flex-start; flex-direction: column; }
+  }
+</style>
+<style id="final-responsive-hardening">
+  .sr-only { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
+  .a11y-skip-link { position:fixed; z-index:1000000; inset-block-start:8px; inset-inline-start:12px; padding:10px 16px; color:#fff; background:#0b6944; border:2px solid #fff; border-radius:6px; font-weight:700; text-decoration:none; transform:translateY(-150%); transition:transform .15s; }
+  .a11y-skip-link:focus { transform:translateY(0); outline:3px solid #000; outline-offset:2px; }
+  .download-toast { position:fixed; z-index:1000001; inset-inline-start:50%; inset-block-end:24px; min-width:min(360px,calc(100vw - 28px)); max-width:calc(100vw - 28px); padding:12px 15px; display:flex; align-items:center; justify-content:center; gap:9px; color:#fff; background:#0b6944; border:1px solid #80bea0; border-radius:10px; box-shadow:0 14px 36px rgba(11,59,46,.25); font-size:13px; font-weight:700; text-align:center; transform:translate(-50%,18px); opacity:0; transition:opacity .18s,transform .18s; }
+  .download-toast[hidden] { display:none; }
+  .download-toast.is-visible { opacity:1; transform:translate(-50%,0); }
+  .download-toast-icon { width:22px; height:22px; display:grid; place-items:center; flex:0 0 auto; color:#0b6944; background:#fff; border-radius:50%; font-size:13px; }
+  .comparison-pdf-hint { margin:-11px 0 16px; color:#60726b; font-size:11px; }
+  :where(a,button,input,select,summary,[tabindex]):focus-visible { outline:3px solid #1b8354; outline-offset:3px; }
+  #main-content:focus { outline:none; }
+  .table-definitions { margin:0 24px 14px; border:1px solid #cddbd4; border-radius:8px; background:#f8fbf9; }
+  .table-definitions summary { min-height:44px; padding:10px 14px; color:#166a45; font-size:13px; font-weight:700; cursor:pointer; }
+  .table-definitions-content { padding:0 14px 13px; }
+  .table-definitions-content dl { display:grid; grid-template-columns:minmax(170px,.7fr) minmax(0,2fr) minmax(120px,.55fr); margin:0; border-top:1px solid #dce6e1; }
+  .table-definitions-content dt,.table-definitions-content dd { margin:0; padding:8px 9px; border-bottom:1px solid #e2e9e5; font-size:12px; line-height:1.6; }
+  .table-definitions-content dt { color:#243a32; font-weight:700; }
+  .table-definitions-content dd { color:#52605a; }
+  .table-definitions-content .definition-unit { color:#166a45; font-weight:600; }
+  .data-table tbody th[scope="row"] { padding:12px 13px; color:#243a32; background:inherit; border-bottom:1px solid #e5e7eb; text-align:right; font-size:inherit; font-weight:600; vertical-align:middle; }
+  img,video,canvas { max-width:100%; height:auto; }
+  .explorer,.comparison-panel,.comparison-visual,.comparison-chart-wrap,.comparison-table-wrap,.repi-chart-card { min-width:0; }
+  .hero h1,.hero p,.comparison-intro h3,.comparison-card-name,.table-heading h3,.support summary { overflow-wrap:anywhere; }
+  .table-wrap,.comparison-table-wrap,.comparison-chart-wrap { scrollbar-gutter:stable; overscroll-behavior-inline:contain; }
+  @media (hover:none) and (pointer:coarse){
+    .view-tab,.dataset-tab,.toolbar-btn,.comparison-actions button,.comparison-chart-toolbar button,.repi-chart-action,.page-btn { min-height:44px; }
+  }
+  @media(max-width:900px){
+    .comparison-chart-tooltip,.repi-chart-tooltip { max-width:min(290px,calc(100vw - 32px)); }
+    .comparison-visual-head > div,.comparison-chart-toolbar { min-width:0; }
+    .comparison-chart-toolbar select { max-width:100%; }
+  }
+  @media(max-width:600px){
+    .explorer { overflow:hidden; }
+    .dataset-nav,.view-tabs { -webkit-overflow-scrolling:touch; scrollbar-width:thin; }
+    .dataset-tab,.view-tab { white-space:nowrap; }
+    #dataTablePanel .toolbar-actions { scrollbar-width:thin; }
+    .comparison-actions button { padding-inline:8px; white-space:normal; line-height:1.45; }
+    .comparison-pdf-hint { margin-top:-9px; }
+    .comparison-chart-toolbar > label { flex:1 0 100%; }
+    .comparison-chart-toolbar select { width:100%; min-height:44px; font-size:16px; }
+    .comparison-chart-wrap::after { content:"مرّر أفقيًا لرؤية تفاصيل الرسم كاملة"; position:sticky; right:8px; bottom:4px; display:inline-block; margin-top:4px; padding:3px 8px; color:#52605a; background:rgba(255,255,255,.94); border:1px solid #d9dfdc; border-radius:999px; font-size:10px; pointer-events:none; }
+    .comparison-table-wrap,.table-wrap { -webkit-overflow-scrolling:touch; }
+    .comparison-chart-wrap,.comparison-table-wrap,.table-wrap { box-shadow:inset 16px 0 18px -18px rgba(11,59,46,.75),inset -16px 0 18px -18px rgba(11,59,46,.75); }
+    .comparison-table-head { gap:7px; }
+    .comparison-table-head > span { align-self:flex-start; }
+    .table-definitions { margin-inline:14px; }
+    .table-definitions-content dl { grid-template-columns:1fr; }
+    .table-definitions-content dt { padding-bottom:2px; border-bottom:0; }
+    .table-definitions-content dd { padding-top:2px; }
+    .table-definitions-content .definition-unit { padding-bottom:9px; }
+    .repi-chart-card:fullscreen,.repi-chart-card.is-expanded { inset:0; padding:8px; border-radius:0; }
+    .repi-chart-card:fullscreen .repi-chart-head,.repi-chart-card.is-expanded .repi-chart-head { position:sticky; top:0; z-index:5; background:#fff; }
+  }
+  @media(max-width:380px){
+    .container { width:calc(100% - 14px); }
+    .view-tabs { margin-inline:7px !important; gap:7px !important; }
+    .view-tab { min-width:112px !important; padding-inline:7px !important; font-size:13px !important; }
+    .comparison-panel { padding-inline:9px; }
+    .comparison-actions { gap:6px; }
+    .comparison-actions button { font-size:11px; }
+    .masthead .actions { grid-template-columns:1fr; }
+    .masthead .btn.primary { grid-column:auto; }
   }
 </style>
 </body>
