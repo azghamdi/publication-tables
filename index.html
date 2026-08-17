@@ -6005,29 +6005,6 @@
   <main class="container" id="main-content" tabindex="-1">
     <section class="explorer" aria-label="بيانات النشرة">
       <div class="explorer-head"><span class="eyebrow">بيانات النشرة</span></div>
-      <section class="release-highlights" aria-labelledby="releaseHighlightsTitle">
-        <div class="release-highlights-head">
-          <div><span class="release-highlights-dot" aria-hidden="true"></span><h2 id="releaseHighlightsTitle">أبرز النتائج</h2></div>
-          <span>الربع الثاني <bdi lang="en">2026</bdi></span>
-        </div>
-        <div class="release-highlights-grid">
-          <article class="release-highlight-card">
-            <span class="release-highlight-label">على أساس سنوي</span>
-            <strong class="release-highlight-value positive" lang="en" dir="ltr">+1.3%</strong>
-            <small>مقارنة بالربع الثاني <bdi lang="en">2025</bdi></small>
-          </article>
-          <article class="release-highlight-card">
-            <span class="release-highlight-label">على أساس ربعي</span>
-            <strong class="release-highlight-value positive" lang="en" dir="ltr">+3.0%</strong>
-            <small>مقارنة بالربع الأول <bdi lang="en">2026</bdi></small>
-          </article>
-          <article class="release-highlight-card release-highlight-card--index">
-            <span class="release-highlight-label">مستوى الرقم القياسي</span>
-            <strong class="release-highlight-value" lang="en" dir="ltr">106.34</strong>
-            <small>سنة الأساس <bdi lang="en">2023 = 100</bdi></small>
-          </article>
-        </div>
-      </section>
       <div class="view-tabs-heading view-tabs-spacer" aria-hidden="true"></div>
       <div class="view-tabs" role="tablist" aria-label="طرق عرض محتوى النشرة">
         <button class="view-tab active" id="dataTableTab" type="button" role="tab" aria-selected="true" aria-controls="dataTablePanel"><span class="view-tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 10h16M10 5v14"/></svg></span><span>جدول البيانات</span></button>
@@ -9796,61 +9773,6 @@
 <style id="ibm-plex-font-enforcement">
   html,body,body button,body input,body select,body textarea,body table,body th,body td,body a,body summary,body label,body output,body code,body pre,body svg text {
     font-family:"IBM Plex Sans Arabic","IBM Plex Sans",Tahoma,Arial,sans-serif !important;
-  }
-</style>
-<style id="release-highlights-style">
-  .release-highlights {
-    margin:18px 22px 8px;
-    overflow:hidden;
-    background:#fff;
-    border:1px solid #cddbd4;
-    border-radius:13px;
-    box-shadow:0 5px 18px rgba(22,61,48,.05);
-  }
-  .release-highlights-head {
-    min-height:56px;
-    padding:12px 17px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    color:#52675f;
-    background:linear-gradient(90deg,#f7faf8,#eef8f3);
-    border-bottom:1px solid #d7e2dc;
-  }
-  .release-highlights-head>div { display:flex; align-items:center; gap:9px; min-width:0; }
-  .release-highlights-head h2 { margin:0; color:#163d30; font-size:17px; line-height:1.4; }
-  .release-highlights-head>span:last-child { font-size:13px; white-space:nowrap; }
-  .release-highlights-dot { width:10px; height:10px; flex:0 0 auto; background:#1b8354; border-radius:50%; box-shadow:0 0 0 4px rgba(27,131,84,.1); }
-  .release-highlights-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); }
-  .release-highlight-card {
-    min-width:0;
-    min-height:142px;
-    padding:18px 16px 16px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    text-align:center;
-    background:#fff;
-    border-inline-start:1px solid #e0e8e4;
-  }
-  .release-highlight-card:first-child { border-inline-start:0; }
-  .release-highlight-label { color:#52675f; font-size:14px; font-weight:600; }
-  .release-highlight-value { margin:3px 0 2px; color:#0f6845; font-size:clamp(36px,4vw,50px); font-weight:700; letter-spacing:-.02em; line-height:1.12; font-variant-numeric:tabular-nums; }
-  .release-highlight-card small { color:#72847c; font-size:12px; line-height:1.5; }
-  .release-highlight-card--index { background:#fbfdfc; }
-  @media(max-width:700px){
-    .release-highlights { margin:14px 14px 7px; }
-    .release-highlights-head { min-height:52px; padding:11px 13px; }
-    .release-highlights-head h2 { font-size:16px; }
-    .release-highlights-grid { grid-template-columns:1fr; }
-    .release-highlight-card { min-height:104px; padding:14px; border-inline-start:0; border-top:1px solid #e0e8e4; }
-    .release-highlight-card:first-child { border-top:0; }
-    .release-highlight-value { font-size:36px; }
-  }
-  @media(max-width:380px){
-    .release-highlights-head { align-items:flex-start; flex-direction:column; gap:3px; }
   }
 </style>
 <style id="goh-navigation-identity-final">
