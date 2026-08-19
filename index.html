@@ -10266,5 +10266,34 @@
   }
 })();
 </script>
+<style id="data-table-alignment-final">
+  #dataTablePanel .data-table thead th,
+  #dataTablePanel .data-table tbody td{
+    text-align:center !important;
+  }
+  #dataTablePanel .data-table thead th button{
+    position:relative;
+    justify-content:center !important;
+    align-items:center;
+    text-align:center !important;
+    padding-inline:18px;
+  }
+  #dataTablePanel .data-table thead th button > span:last-child{
+    position:absolute;
+    inset-inline-end:0;
+  }
+  #dataTablePanel .data-table tbody td.numeric{
+    direction:ltr !important;
+    text-align:center !important;
+  }
+  #dataTablePanel .data-table thead th:first-child,
+  #dataTablePanel .data-table tbody th[scope="row"]{
+    text-align:right !important;
+  }
+  #dataTablePanel .data-table thead th:first-child button{
+    justify-content:flex-start !important;
+    text-align:right !important;
+  }
+</style>
 </body>
 </html>
